@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <!--<color name="colorPrimaryDark">#3700B3</color>-->
+    <color name="colorPrimaryDark">#323848</color>
+    <!--<color name="colorAccent">#03DAC5</color>-->
+    <color name="colorAccent">#FFF</color>
+    <color name="srceen_bg_color">#323848</color>
+    <color name="white">#FFF</color>
+    <color name="gray_color">#717171</color>
+    <color name="black">#000000</color>
+
+    <color name="toolbar_item_color">#313848</color>
+    <color name="background_color">#C1C1C1</color>
+    <color name="text_color1">#3E414A</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="text_link">#477BF1</color>
+
+    <color name="colorOrange">#E97051</color>
+    <color name="liveLessonTextColor">#0C2E60</color>
+    <color name="liveLessonTextColor2">#313749</color>
+    <color name="bottomColor">#9F1B05</color>
+    <color name="rectangle_border_color">#464646</color>
+    <color name="progress_background">#EBEBED</color>
+    <color name="orange">#717171</color>
+
+</resources>

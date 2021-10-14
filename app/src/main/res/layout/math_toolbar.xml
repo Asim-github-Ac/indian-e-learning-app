@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/math_toolbar">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="6dp">
+
+        <ImageView
+            android:id="@+id/math_up_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="24dp"
+            android:padding="5dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_right_arrow" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/mathematics"
+            android:fontFamily="@font/signika_semi_bold"
+            android:textSize="19sp"
+            android:textColor="@color/toolbar_item_color"
+            app:layout_constraintBottom_toBottomOf="@+id/math_up_btn"
+            app:layout_constraintStart_toEndOf="@+id/math_up_btn"
+            app:layout_constraintTop_toTopOf="@+id/math_up_btn" />
+
+
+        <ImageView
+            android:id="@+id/library_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/math_up_btn"
+            app:layout_constraintStart_toStartOf="@+id/math_up_btn"
+            app:layout_constraintTop_toBottomOf="@+id/math_up_btn"
+            app:srcCompat="@drawable/ic_video_library" />
+
+        <TextView
+            android:id="@+id/library_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/signika_semi_bold"
+            android:text="@string/video_library"
+            android:textColor="@color/bottomColor"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/library_icon"
+            app:layout_constraintStart_toEndOf="@+id/library_icon"
+            app:layout_constraintTop_toTopOf="@+id/library_icon" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/_7_chapters"
+            android:fontFamily="@font/asap_regular"
+            android:textColor="@color/toolbar_item_color"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@+id/library_icon"
+            app:layout_constraintTop_toBottomOf="@+id/library_icon" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_95_lessons"
+            android:fontFamily="@font/asap_regular"
+            android:textSize="10sp"
+            android:textColor="@color/text_link"
+            app:layout_constraintBottom_toBottomOf="@+id/textView14"
+            app:layout_constraintStart_toEndOf="@+id/textView14"
+            app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.appcompat.widget.Toolbar>

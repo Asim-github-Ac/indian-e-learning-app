@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constrantlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/live_lesson_background"
+            android:layout_width="263dp"
+            android:layout_height="156dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_live_lesson_card1" />
+
+        <ImageView
+            android:id="@+id/live_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/live_lesson_background"
+            app:layout_constraintVertical_bias="0.25"
+            app:srcCompat="@drawable/ic_live_icon" />
+
+        <TextView
+            android:id="@+id/live_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/asap_regular"
+            android:text="@string/live"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/live_button"
+            app:layout_constraintEnd_toEndOf="@+id/live_button"
+            app:layout_constraintStart_toStartOf="@+id/live_button"
+            app:layout_constraintTop_toTopOf="@+id/live_button" />
+
+        <TextView
+            android:id="@+id/teacher_name"
+            android:layout_width="68dp"
+            android:layout_height="60dp"
+            android:fontFamily="@font/signika_semi_bold"
+            android:text="@string/arya_pandit"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.81"
+            app:layout_constraintStart_toStartOf="@+id/live_lesson_background"
+            app:layout_constraintTop_toBottomOf="@+id/live_button"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/teacher_subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/iit_kanpur"
+            android:fontFamily="@font/asap_regular"
+            android:textSize="13sp"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="@+id/teacher_name"
+            app:layout_constraintStart_toStartOf="@+id/teacher_name"
+            app:layout_constraintTop_toBottomOf="@+id/teacher_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageView
+        android:id="@+id/teacher_image"
+        android:layout_width="126dp"
+        android:layout_height="187dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/constrantlayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/constrantlayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/porgi" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_card"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constrantlayout">
+
+        <TextView
+            android:id="@+id/live_lesson_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/asap_regular"
+            android:text="@string/live_lessons_time"
+            android:textColor="@color/liveLessonTextColor"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/live_lesson_topics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/signika_semi_bold"
+            android:text="@string/recognizing_topic_sentences"
+            android:textAlignment="textStart"
+            android:textColor="@color/liveLessonTextColor2"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

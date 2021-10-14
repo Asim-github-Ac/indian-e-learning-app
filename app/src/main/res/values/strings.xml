@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">Svadhyaya</string>
+
+
+    <string name="login_in_to_svadhayaya">Login in to Svadhayaya</string>
+    <string name="Signup">SignUp in to Svadhayaya</string>
+    <string name="enter_mobile_number">Enter Your Mobile Number</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="btn_next">Next</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="enter_your_one_time_password">Enter your One Time Password</string>
+    <string name="btn_reset_password">RESET PASSWORD</string>
+    <string name="otp_send_to">OTP send to +91 9923235800</string>
+    <string name="reset_svadhyaya_password">Reset Svadhyaya Password</string>
+
+
+    <string name="home">Home</string>
+    <string name="live_lessons">Live Lessons</string>
+    <string name="video_library">Video Library</string>
+    <string name="q_amp_a"><![CDATA[Q & A]]></string>
+
+    <string name="hello_michel">Hello Michel</string>
+    <string name="_10th_class">10th Class</string>
+
+    <string name="ask_doubt">Ask Doubt..?</string>
+    <string name="first_layout_description">Turant Paao Maths ka Video Solution</string>
+
+    <string name="mathematics">MATHEMATICS</string>
+    <string name="physics">PHYSICS</string>
+    <string name="chemistry">CHEMISTRY</string>
+    <string name="biology">BIOLOGY</string>
+
+    <string name="live">Live</string>
+    <string name="arya_pandit">Arya Pandit</string>
+    <string name="iit_kanpur">IIT Kanpur</string>
+    <string name="live_lessons_time">Junior English | 24 Aug, 08:00 AM</string>
+    <string name="recognizing_topic_sentences">Recognizing Topic Sentences</string>
+
+    <string name="practice_main_exam">PRACTICE MAIN\nEXAM</string>
+    <string name="ask_a_question">ASK A QUESTION</string>
+    <string name="why_subscribe">Why Subscribe?</string>
+    <string name="the_benefits_of_svadhyaya">The Benefits of Svadhyaya</string>
+    <string name="choose_a_class">Choose a class</string>
+    <string name="continue_btn">Continue</string>
+    <string name="quit">QUIT</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="_7_chapters">7 Chapters /</string>
+    <string name="_95_lessons">95 Lessons</string>
+    <string name="continue_your_quest">Continue your quest</string>
+    <string name="quest_desc">You\'ve watched 10 of....</string>
+    <string name="compound_interest">Compound Interest</string>
+    <string name="number_based">3. Number Bases and Standard Form</string>
+    <string name="proportions_and_reciprocals">1. Proportions and Reciprocals</string>
+    <string name="practice">PRACTICE</string>
+    <string name="_2_compound_interest">2. Compound Interest</string>
+    <string name="proportions">Proportions</string>
+    <string name="_5_lesson">5 Lesson</string>
+
+    <string-array name="gender">
+        <item>Choose Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>She Male</item>
+    </string-array>
+</resources>
