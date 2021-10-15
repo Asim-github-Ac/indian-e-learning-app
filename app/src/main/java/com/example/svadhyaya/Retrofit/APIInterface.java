@@ -1,5 +1,6 @@
 package com.example.svadhyaya.Retrofit;
 
+import com.example.svadhyaya.RetrofitModel.GetAllPackages;
 import com.example.svadhyaya.RetrofitModel.PackMoreDetails;
 import com.example.svadhyaya.RetrofitModel.PakagesDetails;
 import com.example.svadhyaya.RetrofitModel.RegisterModel;
@@ -18,17 +19,21 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface APIInterface {
+    //Step One
     @POST("auth/register")
     Call<RegisterModel> createUser(@Body RegisterModel registerModel);
+    //Step two
     @POST("auth/login")
     Call<UserLogin> userlogin(@Body UserLogin registerModel);
-
+    //Step three
+    @POST("packages/")
+    Call<GetAllPackages> getpackages(@Body GetAllPackages pkdetails);
+    //Step four
     @POST("auth/getPackageDetails")
     Call<PakagesDetails> PackDetails(@Body PakagesDetails details);
 
-    @FormUrlEncoded
-    @POST("auth/getPackageDetails")
-    Call<PakagesDetails> setdetails(@Field("authkey") String key);
+
+
 
 
 
