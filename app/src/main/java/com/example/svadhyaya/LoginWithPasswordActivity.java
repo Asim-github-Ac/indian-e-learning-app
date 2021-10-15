@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.ProgressDialog;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,19 +15,14 @@ import com.example.svadhyaya.Retrofit.APIClient;
 import com.example.svadhyaya.Retrofit.APIInterface;
 import com.example.svadhyaya.RetrofitModel.UserDetails;
 import com.example.svadhyaya.RetrofitModel.UserLogin;
-import com.example.svadhyaya.SharedPrefrence.PreffrenceManager;
+import com.example.svadhyaya.SharedPrefrence.PrefManager;
 import com.example.svadhyaya.dashboard.activities.MainActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.hbb20.CountryCodePicker;
 
-import java.io.BufferedReader;
-import java.util.ArrayList;
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class LoginWithPasswordActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,14 +33,14 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     private CountryCodePicker codePicker;
     ConstraintLayout constraintLayout;
     APIInterface apiInterface;
-    PreffrenceManager preffrenceManager;
+    PrefManager prefManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_with_password);
         init();
         apiInterface = APIClient.getClient().create(APIInterface.class);
-        preffrenceManager=new PreffrenceManager(this);
+        prefManager=new PrefManager(this);
         btnNext.setOnClickListener(this);
         signup.setOnClickListener(this);
 
@@ -97,14 +90,13 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
                        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                        startActivity(intent);
                        progressDialog.dismiss();
-                       preffrenceManager.setAuthkey(loginResponse.getUser().getAuthkey());
-                       preffrenceManager.setNAme(loginResponse.getUser().getName());
-                       preffrenceManager.setEmailid(loginResponse.getUser().getEmaild());
-                       preffrenceManager.setIs_demo(loginResponse.getUser().getDemo());
-                       preffrenceManager.setProfile_pic(loginResponse.getUser().getProfileUrl());
-                       preffrenceManager.setProfile_updated_status(loginResponse.getUser().getProfilestatus());
-                       preffrenceManager.setNAme(loginResponse.getUser().getName());
-                       System.out.println("auth key iss -------"+preffrenceManager.getNAme());
+//                       prefManager.setAuthkey(loginResponse.getUser().getAuthkey());
+                       prefManager.setUser_name_info(loginResponse.getUser().getName());
+                       prefManager.setSave_Email_InFo(loginResponse.getUser().getEmaild());
+//                       prefManager.setIs_demo(loginResponse.getUser().getDemo());
+//                       prefManager.setProfile_updated_status(loginResponse.getUser().getProfilestatus());
+
+                       System.out.println("auth key iss -------"+loginResponse.getUser().getName());
                    }
                    else {
                        SnackBar("Enter Valid User Name");

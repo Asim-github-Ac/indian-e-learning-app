@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.svadhyaya.R;
+import com.example.svadhyaya.SharedPrefrence.PrefManager;
 import com.example.svadhyaya.dashboard.activities.MainActivity;
 import com.example.svadhyaya.dashboard.adapter.ClassDialogAdapter;
 import com.example.svadhyaya.dashboard.adapter.LiveLessonAdapter;
@@ -44,6 +46,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<ClassDialogModel> classList;
     private ClassDialogAdapter classAdapter;
     private String classTitle;
+    PrefManager prefManager;
 
 
     //live lessons
@@ -62,7 +65,9 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         initView(view);
+        prefManager=new PrefManager(getContext());
 
+        Log.d("tag", "onCreateView: em"+prefManager.getSave_Email_InFo());
         //home_toolbar
         toolbarDrawer.setOnClickListener(new View.OnClickListener() {
             @Override

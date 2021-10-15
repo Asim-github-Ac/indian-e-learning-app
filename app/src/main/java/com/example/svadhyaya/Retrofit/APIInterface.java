@@ -13,6 +13,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface APIInterface {
     @POST("auth/register")
@@ -20,14 +21,26 @@ public interface APIInterface {
     @POST("auth/login")
     Call<UserLogin> userlogin(@Body UserLogin registerModel);
 
+    @GET("auth/login")
+    public void login(
+            @Query("username") String email,
+            @Query("password") String password,
+            @Query("password") String device_id,
+            Callback<MyResponse> callback);
+
+
+
+
+
 
     @FormUrlEncoded
     @POST("auth/login")
-    Call<String> getUserLogin(
-            @Field("username") String uname,
+    public void insertuser(
+            @Field("username") String username,
             @Field("password") String password,
-            @Field("device_id") String deviceid
-    );
+            @Field("device_id") String deviceid,
+            Callback<Response> callback);
+
 
 
 

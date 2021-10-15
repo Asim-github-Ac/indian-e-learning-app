@@ -1,6 +1,11 @@
 package com.example.svadhyaya.RetrofitModel;
 
+import android.service.autofill.UserData;
+
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class UserLogin {
     @SerializedName("username")
@@ -13,21 +18,20 @@ public class UserLogin {
     String status;
     @SerializedName("message")
     String message;
-
+    @SerializedName("data")
+    @Expose
+    private UserDetails user;
     public UserLogin(String username, String password, String deviceid) {
         this.username = username;
         this.password = password;
         this.deviceid = deviceid;
     }
-
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
-
     public String getPassword() {
         return password;
     }
@@ -58,5 +62,13 @@ public class UserLogin {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public UserDetails getUser() {
+        return user;
+    }
+
+    public void setUser(UserDetails user) {
+        this.user = user;
     }
 }
