@@ -29,7 +29,8 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     private Button btnNext;
     private EditText etPhoneNum,etPassword;
     TextView signup;
-    String concode,newconcode;
+
+    String concode,newconcode,authkey;
     private CountryCodePicker codePicker;
     ConstraintLayout constraintLayout;
     APIInterface apiInterface;
@@ -93,7 +94,9 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
 //                       prefManager.setAuthkey(loginResponse.getUser().getAuthkey());
                        prefManager.setUser_name_info(loginResponse.getUser().getName());
                        prefManager.setSave_Email_InFo(loginResponse.getUser().getEmaild());
-//                       prefManager.setIs_demo(loginResponse.getUser().getDemo());
+                       prefManager.setAuthKey(loginResponse.getUser().getAuthkey());
+                       authkey=loginResponse.getUser().getAuthkey();
+                       prefManager.setWeb_time(authkey);
 //                       prefManager.setProfile_updated_status(loginResponse.getUser().getProfilestatus());
 
                        System.out.println("auth key iss -------"+loginResponse.getUser().getName());

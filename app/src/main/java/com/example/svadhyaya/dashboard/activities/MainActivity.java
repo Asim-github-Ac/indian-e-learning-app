@@ -44,11 +44,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initilization();
-        PackagesDetails();
         prefManager=new PrefManager(this);
+
+        Log.d("tags", "onCreate:   key"+ prefManager.getWeb_time());
         apiInterface = APIClient.getClient().create(APIInterface.class);
         getFragment(new HomeFragment());
         mBottomNavigationView.setOnNavigationItemSelectedListener(bottomNav);
+
+        PackagesDetails(prefManager.getWeb_time());
     }
     @Override
     public void onClick(View view) {
@@ -97,11 +100,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDrawerLayout.openDrawer(GravityCompat.START);
     }
 
-    public void PackagesDetails(){
+    public void PackagesDetails(String auth){
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
-        final PakagesDetails packdetails=new PakagesDetails("57316020e03f24759dce0fedeab4caa6");
+        final PakagesDetails packdetails=new PakagesDetails(auth);
         Call<PakagesDetails> call= apiInterface.PackDetails(packdetails);
 
         call.enqueue(new Callback<PakagesDetails>() {
@@ -112,14 +115,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println(details.getMessage());
                 try {
                     if (details != null && details.getStatus().equals("true")){
+                        System.out.println("yahooo ____________"+response);
+                        progressDialog.dismiss();
+                        System.out.println("yahooo data also done  "+details.getUser().getPackMoreDetails().getEmail_id());
 
-
-                        System.out.println("yahooo ____________"+details.getUser().getPackMoreDetails().getEmail_id());
+                        Log.d("tags", "onResponse:   final"+details.getPackdata().getDescription());
+                        System.out.println("yahhooooo second clas data __________________________  "+details.getPackdata().getPackage_name());
 
 
                     }
 
                 }catch (Exception e){
+                    progressDialog.dismiss();
                     System.out.println("Expection __________"+e.getMessage());
                 }
 

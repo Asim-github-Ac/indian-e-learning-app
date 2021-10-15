@@ -33,7 +33,7 @@ public class PrefManager {
     private static final String Web_Coin = "Web_coin";
     private static final String Web_url = "Web_url";
     private static final String id_user = "id_user";
-    private static final String Real_coins = "Real_coins";
+    private static final String authKey = "authkey";
     private Context context;
 
     public PrefManager(Context context) {
@@ -175,15 +175,15 @@ public class PrefManager {
         return sharedPreferences.getString(id_user,"0");
     }
 
-    public  void setReal_coins(String real_coins)
+    public  void setAuthKey(String key)
     {
-        editor.putString(Real_coins,real_coins);
+        editor.putString(authKey,key);
         editor.apply();
 
     }
-    public  String getReal_coins() {
+    public  String getAuthKey() {
 
-        return sharedPreferences.getString(Real_coins,"0");
+        return sharedPreferences.getString(authKey,"0");
     }
 }
 

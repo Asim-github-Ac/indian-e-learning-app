@@ -1,5 +1,7 @@
 package com.example.svadhyaya.Retrofit;
 
+import com.example.svadhyaya.RetrofitModel.PackMoreDetails;
+import com.example.svadhyaya.RetrofitModel.PakagesDetails;
 import com.example.svadhyaya.RetrofitModel.RegisterModel;
 import com.example.svadhyaya.RetrofitModel.UserLogin;
 
@@ -21,12 +23,12 @@ public interface APIInterface {
     @POST("auth/login")
     Call<UserLogin> userlogin(@Body UserLogin registerModel);
 
-    @GET("auth/login")
-    public void login(
-            @Query("username") String email,
-            @Query("password") String password,
-            @Query("password") String device_id,
-            Callback<MyResponse> callback);
+    @POST("auth/getPackageDetails")
+    Call<PakagesDetails> PackDetails(@Body PakagesDetails details);
+
+    @FormUrlEncoded
+    @POST("auth/getPackageDetails")
+    Call<PakagesDetails> setdetails(@Field("authkey") String key);
 
 
 
