@@ -45,30 +45,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         initilization();
         prefManager=new PrefManager(this);
-
         Log.d("tags", "onCreate:   key"+ prefManager.getWeb_time());
         apiInterface = APIClient.getClient().create(APIInterface.class);
         getFragment(new HomeFragment());
         mBottomNavigationView.setOnNavigationItemSelectedListener(bottomNav);
-
         PackagesDetails(prefManager.getWeb_time());
+
+
+
     }
     @Override
     public void onClick(View view) {
+        switch (view.getId()){
 
-
-
-
-    }
-    public void initilization(){
-        mDrawerLayout = findViewById(R.id.drawer);
-        mNavigationView = findViewById(R.id.navigation_view);
-        mBottomNavigationView = findViewById(R.id.bottom_nav);
+        }
     }
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNav = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
             switch (item.getItemId()){
 
                 case R.id.b_home:
@@ -121,24 +115,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         Log.d("tags", "onResponse:   final"+details.getPackdata().getDescription());
                         System.out.println("yahhooooo second clas data __________________________  "+details.getPackdata().getPackage_name());
-
-
                     }
 
                 }catch (Exception e){
                     progressDialog.dismiss();
                     System.out.println("Expection __________"+e.getMessage());
                 }
-
-
-
             }
-
             @Override
             public void onFailure(Call<PakagesDetails> call, Throwable t) {
             progressDialog.dismiss();
                 System.out.println("errros fails______________"+t.getMessage());
             }
         });
+    }
+    public void initilization(){
+        mDrawerLayout = findViewById(R.id.drawer);
+        mNavigationView = findViewById(R.id.navigation_view);
+        mBottomNavigationView = findViewById(R.id.bottom_nav);
     }
 }
