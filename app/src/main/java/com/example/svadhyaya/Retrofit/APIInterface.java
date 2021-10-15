@@ -1,9 +1,16 @@
 package com.example.svadhyaya.Retrofit;
 
+import android.util.Log;
+
+import com.example.svadhyaya.RetrofitModel.ChanePassword;
 import com.example.svadhyaya.RetrofitModel.GetAllPackages;
+import com.example.svadhyaya.RetrofitModel.LiveClassRoom;
+import com.example.svadhyaya.RetrofitModel.LogOut;
+import com.example.svadhyaya.RetrofitModel.News;
 import com.example.svadhyaya.RetrofitModel.PackMoreDetails;
 import com.example.svadhyaya.RetrofitModel.PakagesDetails;
 import com.example.svadhyaya.RetrofitModel.RegisterModel;
+import com.example.svadhyaya.RetrofitModel.StudyMaterial;
 import com.example.svadhyaya.RetrofitModel.UserLogin;
 
 import java.util.List;
@@ -31,6 +38,23 @@ public interface APIInterface {
     //Step four
     @POST("auth/getPackageDetails")
     Call<PakagesDetails> PackDetails(@Body PakagesDetails details);
+    //Step five
+    @POST("auth/logout")
+    Call<LogOut> Logout(@Body LogOut logOut);
+    // Step Seven
+    @POST("auth/change_password")
+    Call<ChanePassword> changepass(@Body ChanePassword chanePassword);
+    // Step Eight
+    @POST("news")
+    Call<News> NEWS_CALL(@Body News news);
+    // Step Nine
+    @POST("study_material")
+    Call<StudyMaterial> STUDY_MATERIAL_CALL(@Body StudyMaterial studyMaterial);
+    // Step ten
+    @POST("study_material/classroom")
+    Call<LiveClassRoom> LIVE_CLASS_ROOM_CALL(@Body LiveClassRoom liveClassRoom);
+
+
 
 
 
