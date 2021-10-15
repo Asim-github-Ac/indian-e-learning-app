@@ -15,10 +15,16 @@ import android.widget.TextView;
 
 import com.example.svadhyaya.Retrofit.APIClient;
 import com.example.svadhyaya.Retrofit.APIInterface;
+import com.example.svadhyaya.RetrofitModel.UserDetails;
 import com.example.svadhyaya.RetrofitModel.UserLogin;
+import com.example.svadhyaya.SharedPrefrence.PreffrenceManager;
 import com.example.svadhyaya.dashboard.activities.MainActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.hbb20.CountryCodePicker;
+
+import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,12 +40,14 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     private CountryCodePicker codePicker;
     ConstraintLayout constraintLayout;
     APIInterface apiInterface;
+    PreffrenceManager preffrenceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_with_password);
         init();
         apiInterface = APIClient.getClient().create(APIInterface.class);
+        preffrenceManager=new PreffrenceManager(this);
         btnNext.setOnClickListener(this);
         signup.setOnClickListener(this);
 
@@ -74,6 +82,7 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
+        final UserDetails userDetails=new UserDetails();
         final UserLogin userLogin=new UserLogin(username,password,"23");
         Call<UserLogin>  call= apiInterface.userlogin(userLogin);
         call.enqueue(new Callback<UserLogin>() {
@@ -82,13 +91,20 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
                 System.out.println("response"+response);
                 UserLogin loginResponse = response.body();
                 System.out.println(loginResponse.getMessage());
-
                try {
                    if (loginResponse != null && loginResponse.getMessage().equals("Login Successfully..") ) {
                        SnackBar("Successfully Login");
                        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                        startActivity(intent);
                        progressDialog.dismiss();
+                       preffrenceManager.setAuthkey(loginResponse.getUser().getAuthkey());
+                       preffrenceManager.setNAme(loginResponse.getUser().getName());
+                       preffrenceManager.setEmailid(loginResponse.getUser().getEmaild());
+                       preffrenceManager.setIs_demo(loginResponse.getUser().getDemo());
+                       preffrenceManager.setProfile_pic(loginResponse.getUser().getProfileUrl());
+                       preffrenceManager.setProfile_updated_status(loginResponse.getUser().getProfilestatus());
+                       preffrenceManager.setNAme(loginResponse.getUser().getName());
+                       System.out.println("auth key iss -------"+preffrenceManager.getNAme());
                    }
                    else {
                        SnackBar("Enter Valid User Name");
@@ -102,6 +118,7 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
             public void onFailure(Call<UserLogin> call, Throwable t) {
                 SnackBar("Something Wrong");
                 progressDialog.dismiss();
+                System.out.println("failer errors is "+t.getMessage());
             }
         });
     }
@@ -116,5 +133,9 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
                     }
                 });
         snackbar.show();
+    }
+    public void SecondMethod(String uname,String pass){
+
+
     }
 }
