@@ -7,14 +7,10 @@
     android:id="@+id/drawer"
     android:fitsSystemWindows="true"
     tools:context=".dashboard.activities.MainActivity">
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/dashboard_background">
-
-
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
@@ -23,8 +19,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
             android:layout_width="0dp"
@@ -39,13 +33,10 @@
             android:background="#00000000"
             app:elevation="0dp"
             app:menu="@menu/bottom_menu" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
         android:layout_gravity="start" />
-
 </androidx.drawerlayout.widget.DrawerLayout>

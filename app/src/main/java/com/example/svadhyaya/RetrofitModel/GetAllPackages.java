@@ -3,9 +3,10 @@ package com.example.svadhyaya.RetrofitModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class GetAllPackages {
+public class GetAllPackages implements Serializable {
 
     @SerializedName("institute_id")
     String institute_id;
@@ -15,7 +16,10 @@ public class GetAllPackages {
     String message;
     @SerializedName("data")
     @Expose
-    List<PackageParts> list = null;
+    List<PackageParts> allpageslist = null;
+
+    public GetAllPackages() {
+    }
 
     public GetAllPackages(String institute_id) {
         this.institute_id = institute_id;
@@ -45,11 +49,12 @@ public class GetAllPackages {
         this.message = message;
     }
 
-    public List<PackageParts> getList() {
-        return list;
+    public List<PackageParts> getAllpageslist() {
+        return allpageslist;
     }
 
-    public void setList(List<PackageParts> list) {
-        this.list = list;
+    public void setAllpageslist(List<PackageParts> allpageslist) {
+        this.allpageslist = allpageslist;
     }
+
 }

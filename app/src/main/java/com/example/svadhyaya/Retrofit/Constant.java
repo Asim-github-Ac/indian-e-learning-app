@@ -7,7 +7,7 @@ public class Constant implements Serializable {
 
     public static String SERVER_URL = "https://www.postman.com/collections/e9fa548aae431e6d0669";
 
-    public static String Register =  "https://dhospitals.com/api/";
+    public static String Register =  "https://nwsols.com/eapp/api/";
     public static String Login ="https://dhospitals.com/api/auth/login";
     public static String Study_Material ="https://dhospitals.com/api/study_material";
     public static String GetProfile ="https://dhospitals.com/api/auth/getProfile";
@@ -17,6 +17,7 @@ public class Constant implements Serializable {
     public static String News="https://dhospitals.com/api/news";
     public static String classroom="https://dhospitals.com/api/study_material/classroom";
     public static String Logout="https://dhospitals.com/api/auth/logout";
+
 
 
 

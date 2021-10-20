@@ -17,7 +17,7 @@ public class PrefManager {
     private static final String DESCRIPTION = "description";
     private static final String LIKES = "likes";
     private static final String RATE = "rate";
-    private static final String ADDRESS = "address";
+    private static final String chooseClass = "class";
     private static final String IS_SELLER = "isSeller";
     private static final String IS_ORDER_FIRST_TIME = "isOrderFirstTime";
     private static final String Total_coins = "total_coins";
@@ -124,15 +124,15 @@ public class PrefManager {
 
             return sharedPreferences.getString(Device_id,"0");
     }
-    public  void setSub_videoid(String sub_videoid)
+    public  void setChooseClass(String chooseClass)
     {
-        editor.putString(sub_videoid,sub_videoid);
+        editor.putString(chooseClass,chooseClass);
         editor.apply();
 
     }
-    public  String getSub_videoid() {
+    public  String getChooseClass() {
 
-        return sharedPreferences.getString(Device_id,"0");
+        return sharedPreferences.getString(chooseClass,"0");
     }
     public  void setWeb_time(String webtime)
     {
@@ -185,5 +185,6 @@ public class PrefManager {
 
         return sharedPreferences.getString(authKey,"0");
     }
+
 }
 

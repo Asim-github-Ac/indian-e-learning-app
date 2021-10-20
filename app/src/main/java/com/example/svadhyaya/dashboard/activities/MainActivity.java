@@ -16,14 +16,15 @@ import androidx.fragment.app.Fragment;
 import com.example.svadhyaya.R;
 import com.example.svadhyaya.Retrofit.APIClient;
 import com.example.svadhyaya.Retrofit.APIInterface;
-import com.example.svadhyaya.RetrofitModel.PackMoreDetails;
 import com.example.svadhyaya.RetrofitModel.PakagesDetails;
-import com.example.svadhyaya.RetrofitModel.UserLogin;
 import com.example.svadhyaya.SharedPrefrence.PrefManager;
 import com.example.svadhyaya.dashboard.fragments.HomeFragment;
 import com.example.svadhyaya.math.MathFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BottomNavigationView mBottomNavigationView;
     PrefManager prefManager;
     APIInterface apiInterface;
-
+    String packagename;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         apiInterface = APIClient.getClient().create(APIInterface.class);
         getFragment(new HomeFragment());
         mBottomNavigationView.setOnNavigationItemSelectedListener(bottomNav);
-        PackagesDetails(prefManager.getWeb_time());
+
 
 
 
@@ -94,8 +95,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDrawerLayout.openDrawer(GravityCompat.START);
     }
 
+
+    public void initilization(){
+        mDrawerLayout = findViewById(R.id.drawer);
+        mNavigationView = findViewById(R.id.navigation_view);
+        mBottomNavigationView = findViewById(R.id.bottom_nav);
+    }
     public void PackagesDetails(String auth){
-        final ProgressDialog progressDialog = new ProgressDialog(this);
+        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
         final PakagesDetails packdetails=new PakagesDetails(auth);
@@ -111,10 +118,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (details != null && details.getStatus().equals("true")){
                         System.out.println("yahooo ____________"+response);
                         progressDialog.dismiss();
-                        System.out.println("yahooo data also done  "+details.getUser().getPackMoreDetails().getEmail_id());
-
-                        Log.d("tags", "onResponse:   final"+details.getPackdata().getDescription());
-                        System.out.println("yahhooooo second clas data __________________________  "+details.getPackdata().getPackage_name());
+                        System.out.println("yahooo data also done  "+details.getMorePakData().getPackMoreDetails().getEmail_id());
+                        packagename =details.getMorePakData().getPackMoreDetails().getPackdata().getPackage_name();
+                        Toast.makeText(MainActivity.this, "end data  "+packagename, Toast.LENGTH_SHORT).show();
+                        System.out.println("yahhooooo second clas data __________________________  "+packagename);
+                        Log.d("tags1", "onResponse:   plname "+packagename);
                     }
 
                 }catch (Exception e){
@@ -124,14 +132,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             @Override
             public void onFailure(Call<PakagesDetails> call, Throwable t) {
-            progressDialog.dismiss();
+                progressDialog.dismiss();
                 System.out.println("errros fails______________"+t.getMessage());
             }
         });
-    }
-    public void initilization(){
-        mDrawerLayout = findViewById(R.id.drawer);
-        mNavigationView = findViewById(R.id.navigation_view);
-        mBottomNavigationView = findViewById(R.id.bottom_nav);
     }
 }

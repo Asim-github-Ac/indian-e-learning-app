@@ -3,28 +3,17 @@ package com.example.svadhyaya.RetrofitModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PackageParts {
-
+public class PackageParts implements Serializable {
 
     String package_id,institute_id,package_name,description,entry_on,entry_by,modified_on,modified_by ;
-
     @SerializedName("subject")
     @Expose
     List<SubjectPackage> subjectClasses = null;
 
-    public PackageParts(){ }
-
-    public PackageParts(String package_id, String institute_id, String package_name, String description, String entry_on, String entry_by, String modified_on, String modified_by) {
-        this.package_id = package_id;
-        this.institute_id = institute_id;
-        this.package_name = package_name;
-        this.description = description;
-        this.entry_on = entry_on;
-        this.entry_by = entry_by;
-        this.modified_on = modified_on;
-        this.modified_by = modified_by;
+    public PackageParts() {
     }
 
     public String getPackage_id() {

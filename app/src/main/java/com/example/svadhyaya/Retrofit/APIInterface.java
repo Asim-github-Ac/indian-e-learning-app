@@ -1,13 +1,10 @@
 package com.example.svadhyaya.Retrofit;
 
-import android.util.Log;
-
 import com.example.svadhyaya.RetrofitModel.ChanePassword;
 import com.example.svadhyaya.RetrofitModel.GetAllPackages;
 import com.example.svadhyaya.RetrofitModel.LiveClassRoom;
 import com.example.svadhyaya.RetrofitModel.LogOut;
 import com.example.svadhyaya.RetrofitModel.News;
-import com.example.svadhyaya.RetrofitModel.PackMoreDetails;
 import com.example.svadhyaya.RetrofitModel.PakagesDetails;
 import com.example.svadhyaya.RetrofitModel.RegisterModel;
 import com.example.svadhyaya.RetrofitModel.StudyMaterial;
@@ -23,7 +20,6 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface APIInterface {
     //Step One

@@ -106,7 +106,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                   }
               }
           }
-
           @Override
           public void onFailure(Call<RegisterModel> call, Throwable t) {
               System.out.println(" errors"  +t.getMessage());

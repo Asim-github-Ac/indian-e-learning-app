@@ -30,7 +30,7 @@
           android:orientation="vertical">
 
          <include layout="@layout/dashboard_first_layout" />
-         <include layout="@layout/video_library_layout"/>
+         <include layout="@layout/subjectitemrecyclerview"/>
          <include layout="@layout/live_lessons_layout"/>
          <include layout="@layout/dashboard_banner"/>
          <include layout="@layout/dashboard_test_layout"/>
