@@ -15,6 +15,12 @@
     <string name="reset_svadhyaya_password">Reset Svadhyaya Password</string>
 
 
+    <string-array name="navigation_drawer_items_array">
+        <item>Connect</item>
+        <item>Fixtures</item>
+        <item>Table</item>
+    </string-array>
+
     <string name="home">Home</string>
     <string name="live_lessons">Live Lessons</string>
     <string name="video_library">Video Library</string>
@@ -59,6 +65,8 @@
     <string name="_2_compound_interest">2. Compound Interest</string>
     <string name="proportions">Proportions</string>
     <string name="_5_lesson">5 Lesson</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
 
     <string-array name="gender">
         <item>Choose Gender</item>

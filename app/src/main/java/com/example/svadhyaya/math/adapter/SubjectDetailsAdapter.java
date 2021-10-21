@@ -9,19 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.svadhyaya.R;
-import com.example.svadhyaya.RetrofitModel.GetAllPackages;
 import com.example.svadhyaya.RetrofitModel.SubjectPackage;
-import com.example.svadhyaya.dashboard.activities.MathActivity;
-import com.example.svadhyaya.math.MathFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SubjectDetailsAdapter extends RecyclerView.Adapter<SubjectDetailsAdapter.SubjectDetailsHolder> {
@@ -47,9 +40,6 @@ public class SubjectDetailsAdapter extends RecyclerView.Adapter<SubjectDetailsAd
         holder.itemimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              Intent intent=new Intent(context, MathActivity.class);
-              intent.putExtra("subj",subjectname);
-              context.startActivity(intent);
 
             }
         });

@@ -9,16 +9,22 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.svadhyaya.R;
 import com.example.svadhyaya.Retrofit.APIClient;
 import com.example.svadhyaya.Retrofit.APIInterface;
 import com.example.svadhyaya.RetrofitModel.PakagesDetails;
 import com.example.svadhyaya.SharedPrefrence.PrefManager;
+import com.example.svadhyaya.dashboard.adapter.DrawerItemCustomAdapter;
 import com.example.svadhyaya.dashboard.fragments.HomeFragment;
+import com.example.svadhyaya.dashboard.fragments.NavigationDrawerFragment;
 import com.example.svadhyaya.math.MathFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -35,11 +41,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //drawer
     private DrawerLayout mDrawerLayout;
-    private NavigationView mNavigationView;
     private BottomNavigationView mBottomNavigationView;
     PrefManager prefManager;
     APIInterface apiInterface;
     String packagename;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         apiInterface = APIClient.getClient().create(APIInterface.class);
         getFragment(new HomeFragment());
         mBottomNavigationView.setOnNavigationItemSelectedListener(bottomNav);
-
-
-
+        setUpToolbar();
+        setUpDrawer();
 
     }
     @Override
@@ -98,43 +103,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void initilization(){
         mDrawerLayout = findViewById(R.id.drawer);
-        mNavigationView = findViewById(R.id.navigation_view);
         mBottomNavigationView = findViewById(R.id.bottom_nav);
     }
-    public void PackagesDetails(String auth){
-        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
-        final PakagesDetails packdetails=new PakagesDetails(auth);
-        Call<PakagesDetails> call= apiInterface.PackDetails(packdetails);
+    private void setUpToolbar() {
 
-        call.enqueue(new Callback<PakagesDetails>() {
-            @Override
-            public void onResponse(Call<PakagesDetails> call, Response<PakagesDetails> response) {
-                System.out.println("response"+response);
-                PakagesDetails details = response.body();
-                System.out.println(details.getMessage());
-                try {
-                    if (details != null && details.getStatus().equals("true")){
-                        System.out.println("yahooo ____________"+response);
-                        progressDialog.dismiss();
-                        System.out.println("yahooo data also done  "+details.getMorePakData().getPackMoreDetails().getEmail_id());
-                        packagename =details.getMorePakData().getPackMoreDetails().getPackdata().getPackage_name();
-                        Toast.makeText(MainActivity.this, "end data  "+packagename, Toast.LENGTH_SHORT).show();
-                        System.out.println("yahhooooo second clas data __________________________  "+packagename);
-                        Log.d("tags1", "onResponse:   plname "+packagename);
-                    }
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+      //  toolbar.inflateMenu(R.menu.bottom_menu);
+    }
+    private void setUpDrawer() {
+        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.nav_drwr_fragment);
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        drawerFragment.setUpDrawer(R.id.nav_drwr_fragment, drawerLayout, toolbar);
 
-                }catch (Exception e){
-                    progressDialog.dismiss();
-                    System.out.println("Expection __________"+e.getMessage());
-                }
-            }
-            @Override
-            public void onFailure(Call<PakagesDetails> call, Throwable t) {
-                progressDialog.dismiss();
-                System.out.println("errros fails______________"+t.getMessage());
-            }
-        });
     }
 }

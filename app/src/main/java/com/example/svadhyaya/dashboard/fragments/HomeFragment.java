@@ -27,7 +27,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.svadhyaya.R;
 import com.example.svadhyaya.Retrofit.APIClient;
 import com.example.svadhyaya.Retrofit.APIInterface;
+import com.example.svadhyaya.Retrofit.LiveClassList3;
 import com.example.svadhyaya.RetrofitModel.GetAllPackages;
+import com.example.svadhyaya.RetrofitModel.LiveClass2;
+import com.example.svadhyaya.RetrofitModel.LiveClassRoom;
 import com.example.svadhyaya.RetrofitModel.PackageParts;
 import com.example.svadhyaya.RetrofitModel.PakagesDetails;
 import com.example.svadhyaya.RetrofitModel.SubjectPackage;
@@ -71,11 +74,11 @@ public class HomeFragment extends Fragment {
     private SubjectAdapter subjectAdapter;
     List<SubjectPackage> subjectPackageList;
     LinearLayoutManager manager;
-
+//dialouge
     //live lessons
     private RecyclerView liveLessonRecyclerView;
     private LinearLayoutManager liveLessonLayoutManager;
-    private List<LiveLessonModel> liveLessonList;
+    private List<LiveClassRoom.LiveClass2.LiveClassList3> liveClassList3s = new ArrayList<>();
     private LiveLessonAdapter liveLessonAdapter;
     //video library
     private ConstraintLayout mathCard,physicsCard,chemistryCard,bioCard;
@@ -84,20 +87,21 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         initView(view);
         apiInterface = APIClient.getClient().create(APIInterface.class);
         prefManager=new PrefManager(getContext());
+        //my live lesson
         liveLessonLayoutManager = new LinearLayoutManager(getContext());
         liveLessonLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         liveLessonRecyclerView.setLayoutManager(liveLessonLayoutManager);
-        liveLessonList = new ArrayList<>();
+
         // subject
         manager = new LinearLayoutManager(getContext());
         manager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(manager);
         subjectPackageList=new ArrayList<>();
         GetPackages("0000000008");
+        GetLiveClass(prefManager.getWeb_time());
         Log.d("tag", "onCreateView: em"+prefManager.getSave_Email_InFo());
         //home_toolbar
         toolbarDrawer.setOnClickListener(new View.OnClickListener() {
@@ -112,22 +116,6 @@ public class HomeFragment extends Fragment {
                 customDialog();
             }
         });
-        //live lesson
-        liveLessonList.add(new LiveLessonModel(R.drawable.ic_live_lesson_card1,R.mipmap.porgi));
-        liveLessonList.add(new LiveLessonModel(R.drawable.ic_live_lesson_card2,R.mipmap.kaka));
-        liveLessonList.add(new LiveLessonModel(R.drawable.ic_live_lesson_card1,R.mipmap.porgi));
-
-        liveLessonAdapter = new LiveLessonAdapter(getContext(),liveLessonList);
-        liveLessonRecyclerView.setAdapter(liveLessonAdapter);
-        liveLessonAdapter.notifyDataSetChanged();
-      //  video library
-//        mathCard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//               getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new MathFragment()).commit();
-//
-//            }
-//        });
 
         return view;
     }
@@ -147,7 +135,6 @@ public class HomeFragment extends Fragment {
         physicsCard = view.findViewById(R.id.physics_card);
         chemistryCard = view.findViewById(R.id.chemistry_card);
         bioCard = view.findViewById(R.id.bio_card);
-
     }
     private void customDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -212,10 +199,6 @@ public class HomeFragment extends Fragment {
                         subjectlist.add(getAllPackages1.getAllpageslist().get(i).getPackage_name());
                     }
                     progressDialog.dismiss();
-                    System.out.println("array list is ___________"+subjectlist);
-                    if (packagename.equals(mClassTitle)){
-                    }
-
 //
                 }
                 else
@@ -268,6 +251,41 @@ public class HomeFragment extends Fragment {
             public void onFailure(Call<GetAllPackages> call, Throwable t) {
                 progressDialog.dismiss();
                 System.out.println("error failer" +call.clone());
+            }
+        });
+    }
+    public void GetLiveClass(String authkey){
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+        final LiveClassRoom liveClassRoom=new LiveClassRoom(authkey);
+        Call<LiveClassRoom> call=apiInterface.LIVE_CLASS_ROOM_CALL(liveClassRoom);
+        call.enqueue(new Callback<LiveClassRoom>() {
+            @Override
+            public void onResponse(Call<LiveClassRoom> call, Response<LiveClassRoom> response) {
+                System.out.println("response"+response);
+                LiveClassRoom liveClassRoom1 = response.body();
+                System.out.println(liveClassRoom1.getMessage());
+                if (liveClassRoom1 !=null && liveClassRoom1.getStatus().equals("true") && liveClassRoom1.getLiveClass2().getLiveClassLists() !=null) {
+                    liveClassList3s=liveClassRoom1.getLiveClass2().getLiveClassLists();
+                   System.out.println("techer name_____"+liveClassRoom1.getLiveClass2());
+                    Log.d("tech", "onResponse: "+liveClassRoom1.getLiveClass2());
+                    System.out.println("techer name_____33"+liveClassRoom1.getLiveClass2().getLiveClassLists());
+                    liveLessonAdapter = new LiveLessonAdapter(getContext(),liveClassList3s);
+                    liveLessonRecyclerView.setAdapter(liveLessonAdapter);
+                    liveLessonAdapter.notifyDataSetChanged();
+                    progressDialog.dismiss();
+
+                }
+                else{
+                    System.out.println("live_____err");
+                    progressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LiveClassRoom> call, Throwable t) {
+            progressDialog.dismiss();
             }
         });
     }

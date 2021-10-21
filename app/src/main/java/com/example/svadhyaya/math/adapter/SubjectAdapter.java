@@ -1,7 +1,6 @@
 package com.example.svadhyaya.math.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.svadhyaya.R;
-import com.example.svadhyaya.RetrofitModel.GetAllPackages;
-import com.example.svadhyaya.RetrofitModel.PackageParts;
 import com.example.svadhyaya.RetrofitModel.SubjectPackage;
-import com.example.svadhyaya.dashboard.activities.SubjectActivity;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectHolder> {
@@ -46,10 +41,10 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectH
        holder.itemimage.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               Intent intent=new Intent(context, SubjectActivity.class);
-               intent.putExtra("pos",String.valueOf(position));
-               intent.putExtra("List",(Serializable) getAllPackagesList);
-               context.startActivity(intent);
+//               Intent intent=new Intent(context, SubjectActivity.class);
+//               intent.putExtra("pos",String.valueOf(position));
+//               intent.putExtra("List",(Serializable) getAllPackagesList);
+//               context.startActivity(intent);
 
            }
        });

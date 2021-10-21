@@ -62,6 +62,22 @@ public class PrefManager {
        editor.putString(Save_Email_InFo,email);
       editor.apply();
     }
+    public  String getUserName() {
+        return sharedPreferences.getString(USER_NAME,"0");
+    }
+    public void setUserName(String email){
+        String res= sharedPreferences.getString(USER_NAME,"0" );
+        editor.putString(USER_NAME,email);
+        editor.apply();
+    }
+    public  String getUserEmail() {
+        return sharedPreferences.getString(USER_EMAIL,"0");
+    }
+    public void setUserEmail(String email){
+        String res= sharedPreferences.getString(USER_EMAIL,"0" );
+        editor.putString(USER_EMAIL,email);
+        editor.apply();
+    }
 
     public String  getUser_name_info() {
        return sharedPreferences.getString(user_name_info,"0");

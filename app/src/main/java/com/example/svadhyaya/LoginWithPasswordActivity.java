@@ -31,6 +31,7 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     TextView signup;
 
     String concode,newconcode,authkey;
+    String username,useremail;
     private CountryCodePicker codePicker;
     ConstraintLayout constraintLayout;
     APIInterface apiInterface;
@@ -90,12 +91,15 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
                        SnackBar("Successfully Login");
                        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                        startActivity(intent);
+                       finish();
 //                       prefManager.setAuthkey(loginResponse.getUser().getAuthkey());
-                       prefManager.setUser_name_info(loginResponse.getUser().getName());
-                       prefManager.setSave_Email_InFo(loginResponse.getUser().getEmaild());
+                       prefManager.setUserName(loginResponse.getUser().getName());
+                       useremail=loginResponse.getUser().getEmaild();
+                       prefManager.setUserEmail(useremail);
                        prefManager.setAuthKey(loginResponse.getUser().getAuthkey());
                        authkey=loginResponse.getUser().getAuthkey();
                        prefManager.setWeb_time(authkey);
+
 //                       prefManager.setProfile_updated_status(loginResponse.getUser().getProfilestatus());
                        System.out.println("auth key iss -------"+loginResponse.getUser().getName());
                    }
