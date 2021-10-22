@@ -2,6 +2,7 @@ package com.example.svadhyaya.Retrofit;
 
 import com.example.svadhyaya.RetrofitModel.ChanePassword;
 import com.example.svadhyaya.RetrofitModel.GetAllPackages;
+import com.example.svadhyaya.RetrofitModel.GetProfile;
 import com.example.svadhyaya.RetrofitModel.LiveClassRoom;
 import com.example.svadhyaya.RetrofitModel.LogOut;
 import com.example.svadhyaya.RetrofitModel.News;
@@ -49,6 +50,9 @@ public interface APIInterface {
     // Step ten
     @POST("study_material/classroom")
     Call<LiveClassRoom> LIVE_CLASS_ROOM_CALL(@Body LiveClassRoom liveClassRoom);
+    //step eleven
+    @POST("auth/getProfile")
+    Call<GetProfile> getprofile(@Body GetProfile liveClassRoom);
 
 
 
