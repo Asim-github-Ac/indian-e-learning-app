@@ -4,12 +4,14 @@ import com.example.svadhyaya.RetrofitModel.ChanePassword;
 import com.example.svadhyaya.RetrofitModel.ContactUs;
 import com.example.svadhyaya.RetrofitModel.GetAllPackages;
 import com.example.svadhyaya.RetrofitModel.GetProfile;
+import com.example.svadhyaya.RetrofitModel.GetSubjects;
 import com.example.svadhyaya.RetrofitModel.LiveClassRoom;
 import com.example.svadhyaya.RetrofitModel.LogOut;
 import com.example.svadhyaya.RetrofitModel.News;
 import com.example.svadhyaya.RetrofitModel.PakagesDetails;
 import com.example.svadhyaya.RetrofitModel.RegisterModel;
 import com.example.svadhyaya.RetrofitModel.StudyMaterial;
+import com.example.svadhyaya.RetrofitModel.Test_Index;
 import com.example.svadhyaya.RetrofitModel.UserLogin;
 
 import java.util.List;
@@ -57,6 +59,12 @@ public interface APIInterface {
     //Step 12
     @POST("forntend/contactus")
     Call<ContactUs> contactnow(@Body ContactUs contactnow);
+    //Step 13
+    @POST("bookmarks/getSubjects")
+    Call<GetSubjects> getSubjects(@Body GetSubjects getSubjects);
+    //Step 14
+    @POST("test/index")
+    Call<Test_Index> TEST_INDEX_CALL(@Body Test_Index test_index);
 
 
 
