@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,24 +28,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.svadhyaya.R;
 import com.example.svadhyaya.Retrofit.APIClient;
 import com.example.svadhyaya.Retrofit.APIInterface;
-import com.example.svadhyaya.Retrofit.LiveClassList3;
 import com.example.svadhyaya.RetrofitModel.GetAllPackages;
-import com.example.svadhyaya.RetrofitModel.LiveClass2;
 import com.example.svadhyaya.RetrofitModel.LiveClassRoom;
 import com.example.svadhyaya.RetrofitModel.PackageParts;
-import com.example.svadhyaya.RetrofitModel.PakagesDetails;
 import com.example.svadhyaya.RetrofitModel.SubjectPackage;
 import com.example.svadhyaya.SharedPrefrence.PrefManager;
 import com.example.svadhyaya.dashboard.activities.MainActivity;
 import com.example.svadhyaya.dashboard.adapter.ClassDialogAdapter;
 import com.example.svadhyaya.dashboard.adapter.LiveLessonAdapter;
 import com.example.svadhyaya.dashboard.model.ClassDialogModel;
-import com.example.svadhyaya.dashboard.model.LiveLessonModel;
-import com.example.svadhyaya.math.MathFragment;
 import com.example.svadhyaya.math.adapter.SubjectAdapter;
-import com.google.gson.Gson;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +55,6 @@ public class HomeFragment extends Fragment {
     private TextView mClassTitle;
     private AlertDialog dialog;
     private ArrayList<ClassDialogModel> classList = new ArrayList<>();
-    private ArrayList<PackageParts> packagePartsArrayList=new ArrayList<>();
     private ClassDialogAdapter classAdapter;
     private String classTitle;
     PrefManager prefManager;
@@ -73,15 +66,14 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     private SubjectAdapter subjectAdapter;
     List<SubjectPackage> subjectPackageList;
-    LinearLayoutManager manager;
+    GridLayoutManager manager;
 //dialouge
     //live lessons
     private RecyclerView liveLessonRecyclerView;
     private LinearLayoutManager liveLessonLayoutManager;
     private List<LiveClassRoom.LiveClass2.LiveClassList3> liveClassList3s = new ArrayList<>();
     private LiveLessonAdapter liveLessonAdapter;
-    //video library
-    private ConstraintLayout mathCard,physicsCard,chemistryCard,bioCard;
+    //video libra
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -96,12 +88,12 @@ public class HomeFragment extends Fragment {
         liveLessonRecyclerView.setLayoutManager(liveLessonLayoutManager);
 
         // subject
-        manager = new LinearLayoutManager(getContext());
-        manager.setOrientation(RecyclerView.HORIZONTAL);
+        manager = new GridLayoutManager(getContext(),2);
+       // manager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(manager);
         subjectPackageList=new ArrayList<>();
         GetPackages("0000000008");
-        GetLiveClass(prefManager.getWeb_time());
+        GetLiveClass("7c54f56b501c2f852676790165213c1b");
         Log.d("tag", "onCreateView: em"+prefManager.getSave_Email_InFo());
         //home_toolbar
         toolbarDrawer.setOnClickListener(new View.OnClickListener() {
@@ -132,9 +124,6 @@ public class HomeFragment extends Fragment {
         recyclerView=view.findViewById(R.id.subjectrecyclerview);
         //video library
      //   mathCard = view.findViewById(R.id.math_card);
-        physicsCard = view.findViewById(R.id.physics_card);
-        chemistryCard = view.findViewById(R.id.chemistry_card);
-        bioCard = view.findViewById(R.id.bio_card);
     }
     private void customDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -275,14 +264,12 @@ public class HomeFragment extends Fragment {
                     liveLessonRecyclerView.setAdapter(liveLessonAdapter);
                     liveLessonAdapter.notifyDataSetChanged();
                     progressDialog.dismiss();
-
                 }
                 else{
                     System.out.println("live_____err");
                     progressDialog.dismiss();
                 }
             }
-
             @Override
             public void onFailure(Call<LiveClassRoom> call, Throwable t) {
             progressDialog.dismiss();

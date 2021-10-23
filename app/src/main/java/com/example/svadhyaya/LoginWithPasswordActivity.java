@@ -92,15 +92,12 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
                        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                        startActivity(intent);
                        finish();
-//                       prefManager.setAuthkey(loginResponse.getUser().getAuthkey());
+                       authkey=loginResponse.getUser().getAuthkey();
+                       prefManager.setWeb_time(authkey);
                        prefManager.setUserName(loginResponse.getUser().getName());
                        useremail=loginResponse.getUser().getEmaild();
                        prefManager.setUserEmail(useremail);
                        prefManager.setAuthKey(loginResponse.getUser().getAuthkey());
-                       authkey=loginResponse.getUser().getAuthkey();
-                       prefManager.setWeb_time(authkey);
-
-//                       prefManager.setProfile_updated_status(loginResponse.getUser().getProfilestatus());
                        System.out.println("auth key iss -------"+loginResponse.getUser().getName());
                    }
                    else {

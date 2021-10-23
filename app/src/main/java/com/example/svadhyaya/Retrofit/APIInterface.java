@@ -1,6 +1,7 @@
 package com.example.svadhyaya.Retrofit;
 
 import com.example.svadhyaya.RetrofitModel.ChanePassword;
+import com.example.svadhyaya.RetrofitModel.ContactUs;
 import com.example.svadhyaya.RetrofitModel.GetAllPackages;
 import com.example.svadhyaya.RetrofitModel.GetProfile;
 import com.example.svadhyaya.RetrofitModel.LiveClassRoom;
@@ -23,37 +24,39 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface APIInterface {
-    //Step One
+    //Step 1
     @POST("auth/register")
     Call<RegisterModel> createUser(@Body RegisterModel registerModel);
-    //Step two
+    //Step 2
     @POST("auth/login")
     Call<UserLogin> userlogin(@Body UserLogin registerModel);
-    //Step three
+    //Step 3
     @POST("packages/")
     Call<GetAllPackages> getpackages(@Body GetAllPackages pkdetails);
-    //Step four
+    //Step 4
     @POST("auth/getPackageDetails")
     Call<PakagesDetails> PackDetails(@Body PakagesDetails details);
-    //Step five
+    //Step 5
     @POST("auth/logout")
     Call<LogOut> Logout(@Body LogOut logOut);
-    // Step Seven
+    // Step 7
     @POST("auth/change_password")
     Call<ChanePassword> changepass(@Body ChanePassword chanePassword);
-    // Step Eight
+    // Step 8
     @POST("news")
     Call<News> NEWS_CALL(@Body News news);
-    // Step Nine
+    // Step 9
     @POST("study_material")
     Call<StudyMaterial> STUDY_MATERIAL_CALL(@Body StudyMaterial studyMaterial);
-    // Step ten
+    // Step 10
     @POST("study_material/classroom")
     Call<LiveClassRoom> LIVE_CLASS_ROOM_CALL(@Body LiveClassRoom liveClassRoom);
-    //step eleven
+    //step 11
     @POST("auth/getProfile")
     Call<GetProfile> getprofile(@Body GetProfile liveClassRoom);
-
+    //Step 12
+    @POST("forntend/contactus")
+    Call<ContactUs> CONTACT_US_CALL(@Body ContactUs contactUs);
 
 
 

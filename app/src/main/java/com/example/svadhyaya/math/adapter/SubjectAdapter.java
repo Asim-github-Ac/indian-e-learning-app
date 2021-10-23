@@ -16,6 +16,12 @@ import com.example.svadhyaya.RetrofitModel.SubjectPackage;
 
 import java.util.List;
 
+import static com.example.svadhyaya.R.drawable.ic_biology_card;
+import static com.example.svadhyaya.R.drawable.ic_calculating;
+import static com.example.svadhyaya.R.drawable.ic_chemistry_card;
+import static com.example.svadhyaya.R.drawable.ic_math_card;
+import static com.example.svadhyaya.R.drawable.ic_physics_card;
+
 public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectHolder> {
 
     private Context context;
@@ -37,15 +43,23 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectH
         SubjectPackage getsubjects = getAllPackagesList.get(position);
         String subjectname= getsubjects.getSubject_name();
 //       holder.LoadData(subjectname);
-        holder.subjecttext.setText(subjectname);
-       holder.itemimage.setOnClickListener(new View.OnClickListener() {
+        if (subjectname.equals("Chemistry")){
+            holder.subjecttext.setText(subjectname);
+            holder.bgimage.setImageResource(ic_chemistry_card);
+        }else if(subjectname.equals("Mathematics")){
+            holder.subjecttext.setText(subjectname);
+            holder.bgimage.setImageResource(ic_math_card);
+        }else if (subjectname.equals("Physics")){
+            holder.subjecttext.setText(subjectname);
+            holder.bgimage.setImageResource(ic_physics_card);
+        }
+        else {
+            holder.subjecttext.setText(subjectname);
+            holder.bgimage.setImageResource(ic_biology_card);
+        }
+       holder.bgimage.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-//               Intent intent=new Intent(context, SubjectActivity.class);
-//               intent.putExtra("pos",String.valueOf(position));
-//               intent.putExtra("List",(Serializable) getAllPackagesList);
-//               context.startActivity(intent);
-
            }
        });
 
@@ -57,13 +71,13 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectH
     }
     public class SubjectHolder extends RecyclerView.ViewHolder {
         TextView subjecttext;
-        ImageView itemimage;
+        ImageView bgimage;
         ConstraintLayout itemlayout;
         public SubjectHolder(@NonNull View itemView) {
             super(itemView);
             subjecttext=itemView.findViewById(R.id.titleclass);
             itemlayout=itemView.findViewById(R.id.itemcontraints);
-            itemimage=itemView.findViewById(R.id.itemclick);
+            bgimage=itemView.findViewById(R.id.bgimage);
         }
         private void LoadData(String subjecrtname){
             subjecttext.setText(subjecrtname);

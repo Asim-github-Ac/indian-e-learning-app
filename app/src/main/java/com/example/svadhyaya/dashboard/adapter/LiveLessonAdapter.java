@@ -1,34 +1,36 @@
 package com.example.svadhyaya.dashboard.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.example.svadhyaya.Interfaces.OnLiveVideoPass;
 import com.example.svadhyaya.R;
-import com.example.svadhyaya.Retrofit.LiveClassList3;
-import com.example.svadhyaya.RetrofitModel.LiveClass2;
 import com.example.svadhyaya.RetrofitModel.LiveClassRoom;
-import com.example.svadhyaya.dashboard.model.LiveLessonModel;
+import com.example.svadhyaya.math.MathFragment;
 
 import java.util.List;
 
 public class LiveLessonAdapter extends RecyclerView.Adapter<LiveLessonAdapter.LiveLessionHolder> {
-
     private Context context;
     private List<LiveClassRoom.LiveClass2.LiveClassList3> liveLessonList;
+
 
     public LiveLessonAdapter(Context context, List<LiveClassRoom.LiveClass2.LiveClassList3> liveLessonList) {
         this.context = context;
         this.liveLessonList = liveLessonList;
     }
-
     @NonNull
     @Override
     public LiveLessionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,16 +45,15 @@ public class LiveLessonAdapter extends RecyclerView.Adapter<LiveLessonAdapter.Li
         holder.live_lesson_time.setText( liveLessonModel.getEntry_on().toString());
         holder.teacher_subject.setText( liveLessonModel.classroom_title.toString());
         holder.live_lesson_topics.setText(liveLessonModel.classroom_title.toString());
+        holder.constraintLayoutlive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-
-
-//        Glide.with(context)
-//                .load(liveLessonModel.getBackground())
-//                .into(holder.backgroundImage);
-//
-//        Glide.with(context)
-//                .load(liveLessonModel.getImage())
-//                .into(holder.personImage);
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                Fragment myFragment = new MathFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
+            }
+        });
     }
 
     @Override
@@ -61,7 +62,7 @@ public class LiveLessonAdapter extends RecyclerView.Adapter<LiveLessonAdapter.Li
     }
 
     public class LiveLessionHolder extends RecyclerView.ViewHolder {
-
+        ConstraintLayout constraintLayoutlive;
         ImageView backgroundImage,personImage;
         TextView teach_name,live_lesson_time,teacher_subject,live_lesson_topics;
 
@@ -74,6 +75,7 @@ public class LiveLessonAdapter extends RecyclerView.Adapter<LiveLessonAdapter.Li
             live_lesson_time=itemView.findViewById(R.id.live_lesson_time);
             teacher_subject=itemView.findViewById(R.id.teacher_subject);
             live_lesson_topics=itemView.findViewById(R.id.live_lesson_topics);
+            constraintLayoutlive=itemView.findViewById(R.id.constrantlayoutloveadp);
         }
     }
 }
