@@ -13,4 +13,11 @@ public class APIClient {
         }
         return retrofit;
     }
+    public static Retrofit getRetrofit() {
+        Retrofit client = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    return client;
+    }
 }

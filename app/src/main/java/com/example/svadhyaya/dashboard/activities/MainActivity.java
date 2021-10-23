@@ -22,18 +22,11 @@ import com.example.svadhyaya.Retrofit.APIClient;
 import com.example.svadhyaya.Retrofit.APIInterface;
 import com.example.svadhyaya.RetrofitModel.PakagesDetails;
 import com.example.svadhyaya.SharedPrefrence.PrefManager;
-import com.example.svadhyaya.dashboard.adapter.DrawerItemCustomAdapter;
 import com.example.svadhyaya.dashboard.fragments.HomeFragment;
 import com.example.svadhyaya.dashboard.fragments.NavigationDrawerFragment;
 import com.example.svadhyaya.math.MathFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 
@@ -46,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     APIInterface apiInterface;
     String packagename;
     Toolbar toolbar;
+    DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,14 +100,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBottomNavigationView = findViewById(R.id.bottom_nav);
     }
     private void setUpToolbar() {
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
       //  toolbar.inflateMenu(R.menu.bottom_menu);
     }
     private void setUpDrawer() {
         NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.nav_drwr_fragment);
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         drawerFragment.setUpDrawer(R.id.nav_drwr_fragment, drawerLayout, toolbar);
 
+    }
+    public void onSideMenuClick() {
+        //place your closeDrawer code here
+        drawerLayout.closeDrawer(GravityCompat.START, false);
     }
 }

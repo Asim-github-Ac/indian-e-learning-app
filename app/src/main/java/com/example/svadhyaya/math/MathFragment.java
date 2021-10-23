@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,7 +35,8 @@ public class MathFragment extends Fragment {
     }
     //toolbar
     ImageView upBtn;
-
+    TextView subject;
+    String subjectname,subjectid;
     //1) proportions
     private RecyclerView proportionsRecyclerView;
     private List<ProportionsModel> proportionsList;
@@ -55,14 +58,21 @@ public class MathFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_math, container, false);
-        upBtn = view.findViewById(R.id.math_up_btn);
+
+        initilization(view);
+        Bundle bundle = this.getArguments();
+        if(bundle != null) {
+             subjectname = bundle.get("subj").toString();
+            subjectid = bundle.get("subjectid").toString();
+            Toast.makeText(getContext(), ""+subjectname, Toast.LENGTH_SHORT).show();
+        }
+        subject.setText(subjectname);
         upBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
             }
         });
-
         //1) proportions
         proportionsRecyclerView = view.findViewById(R.id.proportions_recyclerview);
         LinearLayoutManager proportionLayoutManager = new LinearLayoutManager(getContext());
@@ -112,5 +122,9 @@ public class MathFragment extends Fragment {
         numberBasedAdapter.notifyDataSetChanged();
 
         return view;
+    }
+    public void initilization(View view){
+        subject=view.findViewById(R.id.subjectnamefragment);
+        upBtn = view.findViewById(R.id.math_up_btn);
     }
 }

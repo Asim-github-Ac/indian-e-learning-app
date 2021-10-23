@@ -1,6 +1,7 @@
 package com.example.svadhyaya.math.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.svadhyaya.R;
 import com.example.svadhyaya.RetrofitModel.SubjectPackage;
+import com.example.svadhyaya.math.MathFragment;
 
 import java.util.List;
 
@@ -60,6 +63,13 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectH
        holder.bgimage.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+               Bundle bundle = new Bundle();
+               bundle.putString("subj",subjectname );
+               bundle.putString("subjectid",getsubjects.getSubject_id());
+               MathFragment bookFragment = new MathFragment();
+               bookFragment.setArguments(bundle);
+               AppCompatActivity activity = (AppCompatActivity) view.getContext();
+               activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, bookFragment).addToBackStack(null).commit();
            }
        });
 

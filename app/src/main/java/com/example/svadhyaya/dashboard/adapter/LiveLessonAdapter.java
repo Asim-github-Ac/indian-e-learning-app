@@ -2,6 +2,7 @@ package com.example.svadhyaya.dashboard.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import java.util.List;
 public class LiveLessonAdapter extends RecyclerView.Adapter<LiveLessonAdapter.LiveLessionHolder> {
     private Context context;
     private List<LiveClassRoom.LiveClass2.LiveClassList3> liveLessonList;
+    String subjectname,classtitle;
 
 
     public LiveLessonAdapter(Context context, List<LiveClassRoom.LiveClass2.LiveClassList3> liveLessonList) {
@@ -41,17 +43,15 @@ public class LiveLessonAdapter extends RecyclerView.Adapter<LiveLessonAdapter.Li
     @Override
     public void onBindViewHolder(@NonNull LiveLessionHolder holder, int position) {
         LiveClassRoom.LiveClass2.LiveClassList3 liveLessonModel = liveLessonList.get(position);
-        holder.teacher_subject.setText( liveLessonModel.getSubject_name().toString());
+        subjectname= liveLessonModel.getSubject_name().toString();
+        classtitle= liveLessonModel.classroom_title.toString();
+        holder.teacher_subject.setText(subjectname);
         holder.live_lesson_time.setText( liveLessonModel.getEntry_on().toString());
-        holder.teacher_subject.setText( liveLessonModel.classroom_title.toString());
-        holder.live_lesson_topics.setText(liveLessonModel.classroom_title.toString());
+        holder.live_lesson_topics.setText(classtitle);
         holder.constraintLayoutlive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                Fragment myFragment = new MathFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
             }
         });
     }

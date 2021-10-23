@@ -1,31 +1,55 @@
 package com.example.svadhyaya.RetrofitModel;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class ContactUs  implements Serializable {
+public class ContactNow {
 
     @SerializedName("name")
+    @Expose
     String name;
     @SerializedName("email")
+    @Expose
     String email;
     @SerializedName("mobile_no")
+    @Expose
     String mobile_no;
     @SerializedName("course")
+    @Expose
     String course;
     @SerializedName("message")
+    @Expose
     String message;
     //response
     @SerializedName("status")
+    @Expose
     String status;
+    @SerializedName("message")
+    @Expose
+    String ReplyMessage;
 
-    public ContactUs(String name, String email, String mobile_no, String course, String message) {
+    public ContactNow(String name, String email, String mobile_no, String course, String message) {
         this.name = name;
         this.email = email;
         this.mobile_no = mobile_no;
         this.course = course;
         this.message = message;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getReplyMessage() {
+        return ReplyMessage;
+    }
+
+    public void setReplyMessage(String replyMessage) {
+        ReplyMessage = replyMessage;
     }
 
     public String getName() {
@@ -67,13 +91,4 @@ public class ContactUs  implements Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
 }

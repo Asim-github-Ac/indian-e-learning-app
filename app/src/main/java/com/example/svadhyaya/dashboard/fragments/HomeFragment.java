@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.svadhyaya.R;
 import com.example.svadhyaya.Retrofit.APIClient;
 import com.example.svadhyaya.Retrofit.APIInterface;
+import com.example.svadhyaya.Retrofit.Constant;
 import com.example.svadhyaya.RetrofitModel.GetAllPackages;
 import com.example.svadhyaya.RetrofitModel.LiveClassRoom;
 import com.example.svadhyaya.RetrofitModel.PackageParts;
@@ -82,6 +83,7 @@ public class HomeFragment extends Fragment {
         initView(view);
         apiInterface = APIClient.getClient().create(APIInterface.class);
         prefManager=new PrefManager(getContext());
+        classList.clear();
         //my live lesson
         liveLessonLayoutManager = new LinearLayoutManager(getContext());
         liveLessonLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
@@ -92,7 +94,7 @@ public class HomeFragment extends Fragment {
        // manager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(manager);
         subjectPackageList=new ArrayList<>();
-        GetPackages("0000000008");
+        GetPackages(Constant.insituteId);
         GetLiveClass("7c54f56b501c2f852676790165213c1b");
         Log.d("tag", "onCreateView: em"+prefManager.getSave_Email_InFo());
         //home_toolbar
@@ -148,7 +150,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mClassTitle.setText(classTitle);
-                RefreshPkg("0000000008",classTitle);
+                RefreshPkg(Constant.insituteId,classTitle);
                 dialog.dismiss();
             }
         });
@@ -188,7 +190,6 @@ public class HomeFragment extends Fragment {
                         subjectlist.add(getAllPackages1.getAllpageslist().get(i).getPackage_name());
                     }
                     progressDialog.dismiss();
-//
                 }
                 else
                 {
@@ -215,25 +216,29 @@ public class HomeFragment extends Fragment {
                 System.out.println("response"+response);
                 GetAllPackages getAllPackages1 = response.body();
                 System.out.println(getAllPackages1.getMessage());
-                if (getAllPackages1 !=null && getAllPackages1.getStatus().equals("true")){
-                    allsubj=getAllPackages1.getAllpageslist();
-                    if (pkgname.equals(getAllPackages1.getAllpageslist().get(Integer.parseInt(prefManager.getList_size())).getPackage_name())){
-                        System.out.println("your subject is_________"+getAllPackages1.getAllpageslist().get(Integer.parseInt(prefManager.getList_size())).getSubjectClasses().get(0).getSubject_name());
-                        progressDialog.dismiss();
-                        subjectPackageList=getAllPackages1.getAllpageslist().get(Integer.parseInt(prefManager.getList_size())).getSubjectClasses();
-                        subjectAdapter = new SubjectAdapter(getContext(),subjectPackageList);
-                        recyclerView.setAdapter(subjectAdapter);
-                        subjectAdapter.notifyDataSetChanged();
+                try {
+                    if (getAllPackages1 !=null && getAllPackages1.getStatus().equals("true")){
+                        allsubj=getAllPackages1.getAllpageslist();
+                        if (pkgname.equals(getAllPackages1.getAllpageslist().get(Integer.parseInt(prefManager.getList_size())).getPackage_name())){
+                            System.out.println("your subject is_________"+getAllPackages1.getAllpageslist().get(Integer.parseInt(prefManager.getList_size())).getSubjectClasses().get(0).getSubject_name());
+                            progressDialog.dismiss();
+                            subjectPackageList=getAllPackages1.getAllpageslist().get(Integer.parseInt(prefManager.getList_size())).getSubjectClasses();
+                            subjectAdapter = new SubjectAdapter(getContext(),subjectPackageList);
+                            recyclerView.setAdapter(subjectAdapter);
+                            subjectAdapter.notifyDataSetChanged();
+                        }
+                        else {
+                            System.out.println("nothing found____+++++++");
+                            progressDialog.dismiss();
+                        }
                     }
-                    else {
-                        System.out.println("nothing found____+++++++");
+                    else
+                    {
+                        System.out.println("else part __"+response.message());
                         progressDialog.dismiss();
                     }
-                }
-                else
-                {
-                    System.out.println("else part __"+response.message());
-                    progressDialog.dismiss();
+                }catch (Exception exception){
+                    System.out.println("catch Block Something Wrong___________"+exception.getMessage());
                 }
             }
             @Override
@@ -277,4 +282,15 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        classList.clear();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        classList.clear();
+    }
 }

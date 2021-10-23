@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/constrantlayoutcontactus"
+    tools:context=".dashboard.fragments.ContactUsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:title="Contact Us"
+        app:titleMarginStart="40dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:layout_constraintVertical_bias="0.014">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="15dp"
+              android:text="Reach out to our Customer Care team By Passing Comment You can see bellow"
+              />
+          <EditText
+              android:id="@+id/nameis"
+              android:layout_width="fill_parent"
+              android:layout_height="50dp"
+              android:layout_margin="15dp"
+              android:padding="8dp"
+              android:hint="Enter YOur Name"
+              android:background="@drawable/editborder"
+              android:fontFamily="@font/asap_regular"
+              android:textColor="@color/black"
+              android:textSize="14sp"
+              />
+          <EditText
+              android:id="@+id/emailis"
+              android:layout_width="fill_parent"
+              android:layout_height="50dp"
+              android:layout_margin="15dp"
+              android:padding="8dp"
+              android:hint="Enter YOur Email"
+              android:background="@drawable/editborder"
+              android:fontFamily="@font/asap_regular"
+              android:textColor="@color/black"
+              android:textSize="14sp"
+              />
+          <EditText
+              android:id="@+id/numberis"
+              android:layout_width="fill_parent"
+              android:layout_height="50dp"
+              android:padding="8dp"
+              android:layout_margin="20dp"
+              android:hint="Enter YOur Mobile Number"
+              android:background="@drawable/editborder"
+              android:fontFamily="@font/asap_regular"
+              android:textColor="@color/black"
+              android:textSize="14sp"
+              />
+          <EditText
+              android:id="@+id/courseis"
+              android:layout_width="fill_parent"
+              android:layout_height="50dp"
+              android:padding="8dp"
+              android:layout_margin="20dp"
+              android:hint="Enter YOur Course"
+              android:background="@drawable/editborder"
+              android:fontFamily="@font/asap_regular"
+              android:textColor="@color/black"
+              android:textSize="14sp"
+              />
+          <EditText
+              android:id="@+id/messageis"
+              android:layout_width="fill_parent"
+              android:layout_height="100dp"
+              android:padding="8dp"
+              android:layout_margin="20dp"
+              android:hint="Type Message Here"
+              android:gravity="top"
+              android:background="@drawable/editborder"
+              android:fontFamily="@font/asap_regular"
+              android:textColor="@color/black"
+              android:textSize="14sp"
+              />
+          <Button
+              android:layout_width="250dp"
+              android:layout_height="60dp"
+              android:text="Submit"
+              android:id="@+id/submitis"
+              android:layout_gravity="center"
+              android:layout_marginBottom="20dp"
+              android:textColor="@color/white"
+              android:background="@drawable/button"
+              />
+      </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

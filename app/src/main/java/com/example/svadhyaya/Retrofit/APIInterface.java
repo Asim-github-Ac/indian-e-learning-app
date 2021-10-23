@@ -56,7 +56,7 @@ public interface APIInterface {
     Call<GetProfile> getprofile(@Body GetProfile liveClassRoom);
     //Step 12
     @POST("forntend/contactus")
-    Call<ContactUs> CONTACT_US_CALL(@Body ContactUs contactUs);
+    Call<ContactUs> contactnow(@Body ContactUs contactnow);
 
 
 
