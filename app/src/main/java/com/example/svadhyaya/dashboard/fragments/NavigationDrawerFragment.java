@@ -30,6 +30,7 @@ import com.example.svadhyaya.RetrofitModel.GetAllPackages;
 import com.example.svadhyaya.RetrofitModel.LogOut;
 import com.example.svadhyaya.SharedPrefrence.PrefManager;
 import com.example.svadhyaya.dashboard.activities.ProfileActivity;
+import com.example.svadhyaya.dashboard.activities.TestActivity;
 import com.example.svadhyaya.dashboard.adapter.DrawerItemCustomAdapter;
 import com.example.svadhyaya.dashboard.model.DataModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -61,7 +62,7 @@ public class NavigationDrawerFragment extends Fragment  {
             @Override
             public void onClick(View view) {
                 viewprofile.setTextColor(R.color.red);
-                Intent intent=new Intent(getContext(), ProfileActivity.class);
+                Intent intent=new Intent(getContext(), TestActivity .class);
                 startActivity(intent);
             }
         });
