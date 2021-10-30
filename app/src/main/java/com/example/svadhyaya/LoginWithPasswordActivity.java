@@ -29,7 +29,7 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     private Button btnNext;
     private EditText etPhoneNum,etPassword;
     TextView signup;
-
+    ProgressDialog progressDialog;
     String concode,newconcode,authkey;
     String username,useremail;
     private CountryCodePicker codePicker;
@@ -40,6 +40,7 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_with_password);
+         progressDialog = new ProgressDialog(this);
         init();
         apiInterface = APIClient.getClient().create(APIInterface.class);
         prefManager=new PrefManager(this);
@@ -74,7 +75,6 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     }
     public void SignIn(String username,String password){
         System.out.println("code"+username.toString());
-        final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
         final UserDetails userDetails=new UserDetails();
@@ -85,9 +85,9 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
             public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
                 System.out.println("response"+response);
                 UserLogin loginResponse = response.body();
-                System.out.println(loginResponse.getMessage());
+//                System.out.println(loginResponse.getMessage());
                try {
-                   if (loginResponse != null && loginResponse.getMessage().equals("Login Successfully..") ) {
+                   if (loginResponse != null && loginResponse.getStatus().equals("true") ) {
                        SnackBar("Successfully Login");
                        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                        startActivity(intent);
@@ -129,7 +129,11 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
         snackbar.show();
     }
     public void SecondMethod(String uname,String pass){
+    }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        progressDialog.dismiss();
     }
 }

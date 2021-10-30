@@ -8,6 +8,7 @@
     <color name="srceen_bg_color">#323848</color>
     <color name="white">#FFF</color>
     <color name="gray_color">#717171</color>
+    <color name="grayback">#E8E5E5</color>
     <color name="black">#000000</color>
     <color name="red">#EF0808</color>
     <color name="blue">#3B9AE4</color>
@@ -25,5 +26,6 @@
     <color name="rectangle_border_color">#464646</color>
     <color name="progress_background">#EBEBED</color>
     <color name="orange">#717171</color>
+    <color name="correct_ans_clr">#313749</color>
 
 </resources>

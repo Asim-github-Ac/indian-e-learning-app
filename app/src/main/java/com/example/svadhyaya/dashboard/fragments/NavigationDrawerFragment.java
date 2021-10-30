@@ -1,5 +1,4 @@
 package com.example.svadhyaya.dashboard.fragments;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -39,7 +38,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class NavigationDrawerFragment extends Fragment  {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -95,7 +93,6 @@ public class NavigationDrawerFragment extends Fragment  {
                     SnackBar("Try again please");
                     progressDialog.dismiss();
                 }
-
             }
             @Override
             public void onFailure(Call<LogOut> call, Throwable t) {
@@ -104,9 +101,6 @@ public class NavigationDrawerFragment extends Fragment  {
                 progressDialog.dismiss();
             }
         });
-
-
-
     }
     private void setUpRecyclerView(View view) {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.drawerList);

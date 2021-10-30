@@ -7,7 +7,7 @@ public class Constant implements Serializable {
 
     public static String SERVER_URL = "https://www.postman.com/collections/e9fa548aae431e6d0669";
 
-    public static String Register =  "https://nwsols.com/eapp/api/";
+    public static String Register =  "https://eapp.planethrmsystem.com/api/";
     public static String insituteId =  "0000000008";
 
 

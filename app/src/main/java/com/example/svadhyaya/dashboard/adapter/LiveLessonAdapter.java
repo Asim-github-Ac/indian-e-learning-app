@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.svadhyaya.Interfaces.OnLiveVideoPass;
 import com.example.svadhyaya.R;
 import com.example.svadhyaya.RetrofitModel.LiveClassRoom;
+import com.example.svadhyaya.dashboard.activities.LiveVideoWatch;
 import com.example.svadhyaya.math.MathFragment;
 
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.List;
 public class LiveLessonAdapter extends RecyclerView.Adapter<LiveLessonAdapter.LiveLessionHolder> {
     private Context context;
     private List<LiveClassRoom.LiveClass2.LiveClassList3> liveLessonList;
-    String subjectname,classtitle;
+    String subjectname,classtitle,liveurl;
 
 
     public LiveLessonAdapter(Context context, List<LiveClassRoom.LiveClass2.LiveClassList3> liveLessonList) {
@@ -44,13 +45,17 @@ public class LiveLessonAdapter extends RecyclerView.Adapter<LiveLessonAdapter.Li
     public void onBindViewHolder(@NonNull LiveLessionHolder holder, int position) {
         LiveClassRoom.LiveClass2.LiveClassList3 liveLessonModel = liveLessonList.get(position);
         subjectname= liveLessonModel.getSubject_name().toString();
-        classtitle= liveLessonModel.classroom_title.toString();
+        classtitle= liveLessonModel.getClassroom_title().toString();
+        liveurl=liveLessonModel.getLive_link().toString();
         holder.teacher_subject.setText(subjectname);
         holder.live_lesson_time.setText( liveLessonModel.getEntry_on().toString());
         holder.live_lesson_topics.setText(classtitle);
         holder.constraintLayoutlive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent=new Intent(context, LiveVideoWatch.class);
+                intent.putExtra("liveurl",liveurl);
+                context.startActivity(intent);
 
             }
         });

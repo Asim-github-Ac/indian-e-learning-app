@@ -1,6 +1,7 @@
 package com.example.svadhyaya.dashboard.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -35,6 +36,7 @@ import com.example.svadhyaya.RetrofitModel.PackageParts;
 import com.example.svadhyaya.RetrofitModel.SubjectPackage;
 import com.example.svadhyaya.SharedPrefrence.PrefManager;
 import com.example.svadhyaya.dashboard.activities.MainActivity;
+import com.example.svadhyaya.dashboard.activities.TestActivity;
 import com.example.svadhyaya.dashboard.adapter.ClassDialogAdapter;
 import com.example.svadhyaya.dashboard.adapter.LiveLessonAdapter;
 import com.example.svadhyaya.dashboard.model.ClassDialogModel;
@@ -61,6 +63,7 @@ public class HomeFragment extends Fragment {
     PrefManager prefManager;
     APIInterface apiInterface;
     String packagename,checkpackname;
+    ConstraintLayout constraintLayoutexams;
     ArrayList<String> subjectlist= new ArrayList<>();
     List<PackageParts> allsubj= new ArrayList<>();
     //subject adapter
@@ -88,7 +91,6 @@ public class HomeFragment extends Fragment {
         liveLessonLayoutManager = new LinearLayoutManager(getContext());
         liveLessonLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         liveLessonRecyclerView.setLayoutManager(liveLessonLayoutManager);
-
         // subject
         manager = new GridLayoutManager(getContext(),2);
        // manager.setOrientation(RecyclerView.HORIZONTAL);
@@ -110,6 +112,13 @@ public class HomeFragment extends Fragment {
                 customDialog();
             }
         });
+        constraintLayoutexams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), TestActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
@@ -124,6 +133,7 @@ public class HomeFragment extends Fragment {
         liveLessonRecyclerView = view.findViewById(R.id.live_lesson_recyclerview);
         // subject recyclerview
         recyclerView=view.findViewById(R.id.subjectrecyclerview);
+        constraintLayoutexams=view.findViewById(R.id.constaintsexams);
         //video library
      //   mathCard = view.findViewById(R.id.math_card);
     }
@@ -281,13 +291,11 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         classList.clear();
     }
-
     @Override
     public void onStart() {
         super.onStart();

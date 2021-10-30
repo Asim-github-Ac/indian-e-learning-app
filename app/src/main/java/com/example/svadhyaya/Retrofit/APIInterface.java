@@ -10,6 +10,7 @@ import com.example.svadhyaya.RetrofitModel.LogOut;
 import com.example.svadhyaya.RetrofitModel.News;
 import com.example.svadhyaya.RetrofitModel.PakagesDetails;
 import com.example.svadhyaya.RetrofitModel.RegisterModel;
+import com.example.svadhyaya.RetrofitModel.Start_test;
 import com.example.svadhyaya.RetrofitModel.StudyMaterial;
 import com.example.svadhyaya.RetrofitModel.Test_Index;
 import com.example.svadhyaya.RetrofitModel.UserLogin;
@@ -65,15 +66,9 @@ public interface APIInterface {
     //Step 14
     @POST("test/index")
     Call<Test_Index> TEST_INDEX_CALL(@Body Test_Index test_index);
-
-
-
-
-
-
-
-
-
+    //Step 15
+    @POST("test/start_test")
+    Call<Start_test> START_TEST_CALL(@Body Start_test start_test);
 
     @FormUrlEncoded
     @POST("auth/login")
