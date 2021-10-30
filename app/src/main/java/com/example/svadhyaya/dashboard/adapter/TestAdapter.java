@@ -55,6 +55,9 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
             @Override
             public void onClick(View view) {
                 holder.option1.setBackgroundColor(R.color.correct_ans_clr);
+                holder.option2.setBackgroundColor(R.color.white);
+                holder.option3.setBackgroundColor(R.color.white);
+                holder.option4.setBackgroundColor(R.color.white);
                 if (questionList.getOptions().get(0).getIs_correct().equals("YES")){
                     holder.clear.setVisibility(View.VISIBLE);
 
@@ -69,6 +72,9 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
             @Override
             public void onClick(View view) {
                 holder.option2.setBackgroundColor(R.color.correct_ans_clr);
+                holder.option1.setBackgroundColor(R.color.white);
+                holder.option3.setBackgroundColor(R.color.white);
+                holder.option4.setBackgroundColor(R.color.white);
                 if (questionList.getOptions().get(1).getIs_correct().equals("YES")){
                     holder.clear.setVisibility(View.VISIBLE);
                 }
@@ -82,6 +88,9 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
             @Override
             public void onClick(View view) {
                 holder.option3.setBackgroundColor(R.color.correct_ans_clr);
+                holder.option1.setBackgroundColor(R.color.white);
+                holder.option2.setBackgroundColor(R.color.white);
+                holder.option4.setBackgroundColor(R.color.white);
                 if (questionList.getOptions().get(2).getIs_correct().equals("YES")){
                     holder.clear.setVisibility(View.VISIBLE);
                 }
@@ -95,6 +104,9 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
             @Override
             public void onClick(View view) {
                 holder.option4.setBackgroundColor(R.color.correct_ans_clr);
+                holder.option1.setBackgroundColor(R.color.white);
+                holder.option2.setBackgroundColor(R.color.white);
+                holder.option3.setBackgroundColor(R.color.white);
                 if (questionList.getOptions().get(3).getIs_correct().equals("YES")){
                     holder.clear.setVisibility(View.VISIBLE);
                     System.out.println("options is ______"+questionList.getOptions().get(3).getIs_correct());
@@ -120,6 +132,10 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
                         @Override
                         public void onClick(View view) {
                             holder.option1.setBackgroundColor(R.color.correct_ans_clr);
+                            holder.option2.setBackgroundColor(R.color.white);
+                            holder.option3.setBackgroundColor(R.color.white);
+                            holder.option4.setBackgroundColor(R.color.white);
+
                             if (questionListinner.getOptions().get(0).getIs_correct().equals("YES")){
                                 holder.clear.setVisibility(View.VISIBLE);
                             }
@@ -133,6 +149,9 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
                         @Override
                         public void onClick(View view) {
                             holder.option2.setBackgroundColor(R.color.correct_ans_clr);
+                            holder.option1.setBackgroundColor(R.color.white);
+                            holder.option3.setBackgroundColor(R.color.white);
+                            holder.option4.setBackgroundColor(R.color.white);
                             if (questionListinner.getOptions().get(1).getIs_correct().equals("YES")){
                                 holder.clear.setVisibility(View.VISIBLE);
                             }
@@ -146,6 +165,9 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
                         @Override
                         public void onClick(View view) {
                             holder.option3.setBackgroundColor(R.color.correct_ans_clr);
+                            holder.option1.setBackgroundColor(R.color.white);
+                            holder.option2.setBackgroundColor(R.color.white);
+                            holder.option4.setBackgroundColor(R.color.white);
                             if (questionListinner.getOptions().get(2).getIs_correct().equals("YES")){
                                 holder.clear.setVisibility(View.VISIBLE);
                             }
@@ -159,6 +181,9 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
                         @Override
                         public void onClick(View view) {
                             holder.option4.setBackgroundColor(R.color.correct_ans_clr);
+                            holder.option1.setBackgroundColor(R.color.white);
+                            holder.option3.setBackgroundColor(R.color.white);
+                            holder.option3.setBackgroundColor(R.color.white);
                             if (questionListinner.getOptions().get(3).getIs_correct().equals("YES")){
                                 holder.clear.setVisibility(View.VISIBLE);
                                 System.out.println("options is ______"+questionList.getOptions().get(3).getIs_correct());
@@ -197,6 +222,18 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
             }
         }
     });
+    holder.clear.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            holder.clear.setVisibility(View.INVISIBLE);
+        }
+    });
+        holder.wrong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.wrong.setVisibility(View.INVISIBLE);
+            }
+        });
     }
     @Override
     public int getItemCount() {
