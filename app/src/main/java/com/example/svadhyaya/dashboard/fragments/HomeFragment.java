@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,12 +57,14 @@ public class HomeFragment extends Fragment {
     private TextView toolbarTitle;
     private CardView openCustomDialog;
     private TextView mClassTitle;
+    ProgressBar progressBar;
     private AlertDialog dialog;
     private ArrayList<ClassDialogModel> classList = new ArrayList<>();
     private ClassDialogAdapter classAdapter;
     private String classTitle;
     PrefManager prefManager;
     APIInterface apiInterface;
+    ConstraintLayout constraintLayout;
     String packagename,checkpackname;
     ConstraintLayout constraintLayoutexams;
     ArrayList<String> subjectlist= new ArrayList<>();
@@ -86,7 +89,6 @@ public class HomeFragment extends Fragment {
         initView(view);
         apiInterface = APIClient.getClient().create(APIInterface.class);
         prefManager=new PrefManager(getContext());
-        classList.clear();
         //my live lesson
         liveLessonLayoutManager = new LinearLayoutManager(getContext());
         liveLessonLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
@@ -134,6 +136,8 @@ public class HomeFragment extends Fragment {
         // subject recyclerview
         recyclerView=view.findViewById(R.id.subjectrecyclerview);
         constraintLayoutexams=view.findViewById(R.id.constaintsexams);
+        progressBar=view.findViewById(R.id.progresshome);
+        constraintLayout=view.findViewById(R.id.constrainshome);
         //video library
      //   mathCard = view.findViewById(R.id.math_card);
     }
@@ -180,9 +184,8 @@ public class HomeFragment extends Fragment {
         dialog.getWindow().getDecorView().setBackgroundDrawable(background);
     }
     public  void  GetPackages(String authkey){
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+        progressBar.setVisibility(View.VISIBLE);
+        constraintLayout.setVisibility(View.INVISIBLE);
         final GetAllPackages getAllPackages=new GetAllPackages(authkey);
         Call<GetAllPackages> call=apiInterface.getpackages(getAllPackages);
         call.enqueue(new Callback<GetAllPackages>() {
@@ -199,25 +202,28 @@ public class HomeFragment extends Fragment {
                         classList.add(new ClassDialogModel(packagename));
                         subjectlist.add(getAllPackages1.getAllpageslist().get(i).getPackage_name());
                     }
-                    progressDialog.dismiss();
+                    progressBar.setVisibility(View.INVISIBLE);
+                    constraintLayout.setVisibility(View.VISIBLE);
                 }
                 else
                 {
                     System.out.println("else part __"+response);
-                    progressDialog.dismiss();
+                    progressBar.setVisibility(View.INVISIBLE);
+                    constraintLayout.setVisibility(View.VISIBLE);
                 }
             }
             @Override
             public void onFailure(Call<GetAllPackages> call, Throwable t) {
-                progressDialog.dismiss();
+                progressBar.setVisibility(View.INVISIBLE);
+                constraintLayout.setVisibility(View.VISIBLE);
                 System.out.println("error failer" +t.getMessage());
             }
         });
     }
     public  void  RefreshPkg(String authkey,String pkgname){
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+        progressBar.setVisibility(View.VISIBLE);
+        constraintLayout.setVisibility(View.INVISIBLE);
         final GetAllPackages getAllPackages=new GetAllPackages(authkey);
         Call<GetAllPackages> call=apiInterface.getpackages(getAllPackages);
         call.enqueue(new Callback<GetAllPackages>() {
@@ -231,7 +237,8 @@ public class HomeFragment extends Fragment {
                         allsubj=getAllPackages1.getAllpageslist();
                         if (pkgname.equals(getAllPackages1.getAllpageslist().get(Integer.parseInt(prefManager.getList_size())).getPackage_name())){
                             System.out.println("your subject is_________"+getAllPackages1.getAllpageslist().get(Integer.parseInt(prefManager.getList_size())).getSubjectClasses().get(0).getSubject_name());
-                            progressDialog.dismiss();
+                            progressBar.setVisibility(View.INVISIBLE);
+                            constraintLayout.setVisibility(View.VISIBLE);
                             subjectPackageList=getAllPackages1.getAllpageslist().get(Integer.parseInt(prefManager.getList_size())).getSubjectClasses();
                             subjectAdapter = new SubjectAdapter(getContext(),subjectPackageList);
                             recyclerView.setAdapter(subjectAdapter);
@@ -239,29 +246,32 @@ public class HomeFragment extends Fragment {
                         }
                         else {
                             System.out.println("nothing found____+++++++");
-                            progressDialog.dismiss();
+                            progressBar.setVisibility(View.INVISIBLE);
+                            constraintLayout.setVisibility(View.VISIBLE);
                         }
                     }
                     else
                     {
                         System.out.println("else part __"+response.message());
-                        progressDialog.dismiss();
+                        progressBar.setVisibility(View.INVISIBLE);
+                        constraintLayout.setVisibility(View.VISIBLE);
                     }
                 }catch (Exception exception){
                     System.out.println("catch Block Something Wrong___________"+exception.getMessage());
+                    progressBar.setVisibility(View.INVISIBLE);
+                    constraintLayout.setVisibility(View.VISIBLE);
                 }
             }
             @Override
             public void onFailure(Call<GetAllPackages> call, Throwable t) {
-                progressDialog.dismiss();
+                progressBar.setVisibility(View.INVISIBLE);
+                constraintLayout.setVisibility(View.VISIBLE);
                 System.out.println("error failer" +call.clone());
             }
         });
     }
     public void GetLiveClass(String authkey){
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+      progressBar.setVisibility(View.VISIBLE);
         final LiveClassRoom liveClassRoom=new LiveClassRoom(authkey);
         Call<LiveClassRoom> call=apiInterface.LIVE_CLASS_ROOM_CALL(liveClassRoom);
         call.enqueue(new Callback<LiveClassRoom>() {
@@ -278,16 +288,16 @@ public class HomeFragment extends Fragment {
                     liveLessonAdapter = new LiveLessonAdapter(getContext(),liveClassList3s);
                     liveLessonRecyclerView.setAdapter(liveLessonAdapter);
                     liveLessonAdapter.notifyDataSetChanged();
-                    progressDialog.dismiss();
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
                 else{
                     System.out.println("live_____err");
-                    progressDialog.dismiss();
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
             }
             @Override
             public void onFailure(Call<LiveClassRoom> call, Throwable t) {
-            progressDialog.dismiss();
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
     }

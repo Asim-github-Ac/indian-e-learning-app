@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.svadhyaya.R;
@@ -37,8 +39,8 @@ Button submitbtn;
 String  timervalue;
 APIInterface apiInterface;
 PrefManager prefManager;
+ProgressBar progressBar;
 LinearLayoutManager liveLessonLayoutManager;
-ProgressDialog progressDialog;
 List<QuestionList> questionListList=new ArrayList<>();
 TestAdapter testAdapter;
 CountDownTimer cdt = null;
@@ -48,8 +50,6 @@ public int counter =10;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         initilization();
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
         apiInterface = APIClient.getClient().create(APIInterface.class);
         prefManager=new PrefManager(this);
         GetQuestion("57316020e03f24759dce0fedeab4caa6","1");
@@ -57,6 +57,7 @@ public int counter =10;
 
     }
     public void GetQuestion(String authkey,String testid){
+        progressBar.setVisibility(View.VISIBLE);
         final Start_test  start_test=new Start_test(authkey,testid);
         Call<Start_test> call=apiInterface.START_TEST_CALL(start_test);
         call.enqueue(new Callback<Start_test>() {
@@ -85,18 +86,21 @@ public int counter =10;
 
                            }
                        }.start();
+                      progressBar.setVisibility(View.INVISIBLE);
                    }
                    else
                    {
                        System.out.println("else part __"+response.message());
-                       progressDialog.dismiss();
+                       progressBar.setVisibility(View.INVISIBLE);
                    }
                }catch (Exception exception){
                    System.out.println("catch tes___________"+exception);
+                   progressBar.setVisibility(View.INVISIBLE);
                }
             }
             @Override
             public void onFailure(Call<Start_test> call, Throwable t) {
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -104,5 +108,6 @@ public int counter =10;
         testrecycler=findViewById(R.id.testrecyclerview);
         timertv=findViewById(R.id.counttimer);
         submitbtn=findViewById(R.id.submittest);
+        progressBar=findViewById(R.id.testprogress);
   }
 }

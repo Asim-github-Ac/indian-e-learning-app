@@ -7,46 +7,69 @@
     android:background="@drawable/dashboard_background"
     tools:context=".dashboard.activities.TestActivity">
 
-    <Toolbar
-        android:id="@+id/toolbar4"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.004">
+        app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:layout_width="100dp"
+        <Toolbar
+            android:id="@+id/toolbar4"
+            android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:id="@+id/counttimer"
-            android:gravity="center"
-            android:text="38:20"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.004">
 
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:id="@+id/submittest"
-            android:layout_gravity="end"
-            android:layout_marginEnd="20dp"
-            android:background="#EC4E1C"
-            android:gravity="center"
-            android:text="submit"
-            android:textColor="@color/white" />
-    </Toolbar>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/testrecyclerview"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar4"
-        app:layout_constraintVertical_bias="0.0" />
+            <TextView
+                android:id="@+id/counttimer"
+                android:layout_width="100dp"
+                android:layout_height="?actionBarSize"
+                android:gravity="center"
+                android:text="38:20"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/submittest"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:background="#EC4E1C"
+                android:gravity="center"
+                android:text="submit"
+                android:textColor="@color/white" />
+        </Toolbar>
+        <ProgressBar
+            android:id="@+id/testprogress"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="100dp"
+            android:indeterminateDrawable="@drawable/progress_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/testrecyclerview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.37" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/testrecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar4"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

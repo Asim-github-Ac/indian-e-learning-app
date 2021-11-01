@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:background="@color/white">
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profilepic"
             android:layout_width="100dp"
@@ -51,6 +50,13 @@
             app:layout_constraintVertical_bias="0.101" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        android:id="@+id/progressbarnav"
+        android:indeterminateDrawable="@drawable/progress_icon"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/drawerList"
         android:layout_width="match_parent"

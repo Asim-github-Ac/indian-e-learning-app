@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,7 +25,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
     int j=0;
     ProgressDialog progressDialog;
     List<QuestionList> questionListList;
-
+    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
     public TestAdapter(Context context1,List<QuestionList> questionListList1){
         this.context=context1;
@@ -54,10 +55,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
-                holder.option1.setBackgroundColor(R.color.correct_ans_clr);
-                holder.option2.setBackgroundColor(R.color.white);
-                holder.option3.setBackgroundColor(R.color.white);
-                holder.option4.setBackgroundColor(R.color.white);
+
                 if (questionList.getOptions().get(0).getIs_correct().equals("YES")){
                     holder.clear.setVisibility(View.VISIBLE);
 
@@ -71,10 +69,6 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
-                holder.option2.setBackgroundColor(R.color.correct_ans_clr);
-                holder.option1.setBackgroundColor(R.color.white);
-                holder.option3.setBackgroundColor(R.color.white);
-                holder.option4.setBackgroundColor(R.color.white);
                 if (questionList.getOptions().get(1).getIs_correct().equals("YES")){
                     holder.clear.setVisibility(View.VISIBLE);
                 }
@@ -87,10 +81,6 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
-                holder.option3.setBackgroundColor(R.color.correct_ans_clr);
-                holder.option1.setBackgroundColor(R.color.white);
-                holder.option2.setBackgroundColor(R.color.white);
-                holder.option4.setBackgroundColor(R.color.white);
                 if (questionList.getOptions().get(2).getIs_correct().equals("YES")){
                     holder.clear.setVisibility(View.VISIBLE);
                 }
@@ -103,10 +93,6 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
-                holder.option4.setBackgroundColor(R.color.correct_ans_clr);
-                holder.option1.setBackgroundColor(R.color.white);
-                holder.option2.setBackgroundColor(R.color.white);
-                holder.option3.setBackgroundColor(R.color.white);
                 if (questionList.getOptions().get(3).getIs_correct().equals("YES")){
                     holder.clear.setVisibility(View.VISIBLE);
                     System.out.println("options is ______"+questionList.getOptions().get(3).getIs_correct());
@@ -132,10 +118,6 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
                         @Override
                         public void onClick(View view) {
                             holder.option1.setBackgroundColor(R.color.correct_ans_clr);
-                            holder.option2.setBackgroundColor(R.color.white);
-                            holder.option3.setBackgroundColor(R.color.white);
-                            holder.option4.setBackgroundColor(R.color.white);
-
                             if (questionListinner.getOptions().get(0).getIs_correct().equals("YES")){
                                 holder.clear.setVisibility(View.VISIBLE);
                             }
@@ -148,10 +130,6 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
                         @SuppressLint("ResourceAsColor")
                         @Override
                         public void onClick(View view) {
-                            holder.option2.setBackgroundColor(R.color.correct_ans_clr);
-                            holder.option1.setBackgroundColor(R.color.white);
-                            holder.option3.setBackgroundColor(R.color.white);
-                            holder.option4.setBackgroundColor(R.color.white);
                             if (questionListinner.getOptions().get(1).getIs_correct().equals("YES")){
                                 holder.clear.setVisibility(View.VISIBLE);
                             }
@@ -164,10 +142,6 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
                         @SuppressLint("ResourceAsColor")
                         @Override
                         public void onClick(View view) {
-                            holder.option3.setBackgroundColor(R.color.correct_ans_clr);
-                            holder.option1.setBackgroundColor(R.color.white);
-                            holder.option2.setBackgroundColor(R.color.white);
-                            holder.option4.setBackgroundColor(R.color.white);
                             if (questionListinner.getOptions().get(2).getIs_correct().equals("YES")){
                                 holder.clear.setVisibility(View.VISIBLE);
                             }
@@ -180,10 +154,6 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
                         @SuppressLint("ResourceAsColor")
                         @Override
                         public void onClick(View view) {
-                            holder.option4.setBackgroundColor(R.color.correct_ans_clr);
-                            holder.option1.setBackgroundColor(R.color.white);
-                            holder.option3.setBackgroundColor(R.color.white);
-                            holder.option3.setBackgroundColor(R.color.white);
                             if (questionListinner.getOptions().get(3).getIs_correct().equals("YES")){
                                 holder.clear.setVisibility(View.VISIBLE);
                                 System.out.println("options is ______"+questionList.getOptions().get(3).getIs_correct());

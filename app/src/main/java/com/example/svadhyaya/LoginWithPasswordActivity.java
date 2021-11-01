@@ -6,9 +6,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.svadhyaya.Retrofit.APIClient;
@@ -36,6 +39,9 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     ConstraintLayout constraintLayout;
     APIInterface apiInterface;
     PrefManager prefManager;
+    ProgressBar progressBar;
+    int i = 0;
+    Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +60,9 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
         etPhoneNum=findViewById(R.id.editTextPhone);
         etPassword=findViewById(R.id.et_password);
         codePicker=findViewById(R.id.ccp);
-        constraintLayout=findViewById(R.id.constrantlayout);
+        constraintLayout=findViewById(R.id.constraintLayout1);
         signup=findViewById(R.id.Signup);
+        progressBar = findViewById(R.id.progresslogin);
     }
 
     @Override
@@ -75,8 +82,10 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     }
     public void SignIn(String username,String password){
         System.out.println("code"+username.toString());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+       // progressDialog.setMessage("Loading...");
+       // progressDialog.show();
+        progressBar.setVisibility(View.VISIBLE);
+        constraintLayout.setVisibility(View.INVISIBLE);
         final UserDetails userDetails=new UserDetails();
         final UserLogin userLogin=new UserLogin(username,password,"23");
         Call<UserLogin>  call= apiInterface.userlogin(userLogin);
@@ -102,16 +111,19 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
                    }
                    else {
                        SnackBar("Enter Valid User Name");
-                       progressDialog.dismiss();
+                      progressBar.setVisibility(View.INVISIBLE);
+                      constraintLayout.setVisibility(View.VISIBLE);
                    }
                }catch (Exception exception){
-                   progressDialog.dismiss();
+                   progressBar.setVisibility(View.INVISIBLE);
+                   constraintLayout.setVisibility(View.VISIBLE);
                }
             }
             @Override
             public void onFailure(Call<UserLogin> call, Throwable t) {
                 SnackBar("Something Wrong");
                 progressDialog.dismiss();
+                constraintLayout.setVisibility(View.VISIBLE);
                 System.out.println("failer errors is "+t.getMessage());
             }
         });
@@ -134,6 +146,6 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        progressDialog.dismiss();
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }

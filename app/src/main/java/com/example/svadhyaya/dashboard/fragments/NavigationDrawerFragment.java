@@ -60,7 +60,7 @@ public class NavigationDrawerFragment extends Fragment  {
             @Override
             public void onClick(View view) {
                 viewprofile.setTextColor(R.color.red);
-                Intent intent=new Intent(getContext(), TestActivity .class);
+                Intent intent=new Intent(getContext(), ProfileActivity .class);
                 startActivity(intent);
             }
         });
@@ -72,11 +72,8 @@ public class NavigationDrawerFragment extends Fragment  {
         });
         return view;
     }
-
     public void LogoutFun(String authkey){
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+       progressBar.setVisibility(View.VISIBLE);
         final LogOut logOut=new LogOut(authkey);
         Call<LogOut> call=apiInterface.Logout(logOut);
         call.enqueue(new Callback<LogOut>() {
@@ -91,14 +88,14 @@ public class NavigationDrawerFragment extends Fragment  {
                     startActivity(intent);
                 }else {
                     SnackBar("Try again please");
-                    progressDialog.dismiss();
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
             }
             @Override
             public void onFailure(Call<LogOut> call, Throwable t) {
                 System.out.println("errorss" +t.getMessage());
                 SnackBar("Something Wrong");
-                progressDialog.dismiss();
+               progressBar.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -145,6 +142,7 @@ public class NavigationDrawerFragment extends Fragment  {
         profilename=view.findViewById(R.id.profilename);
         viewprofile=view.findViewById(R.id.viewprofile);
         profilepic=view.findViewById(R.id.profilepic);
+        progressBar=view.findViewById(R.id.progressbarnav);
         viewprofile.setClickable(true);
         linearLayoutlogout=view.findViewById(R.id.linearlayoutlogout);
         profilename.setText(prefManager.getUserName());
@@ -161,5 +159,4 @@ public class NavigationDrawerFragment extends Fragment  {
                 });
         snackbar.show();
     }
-
 }
