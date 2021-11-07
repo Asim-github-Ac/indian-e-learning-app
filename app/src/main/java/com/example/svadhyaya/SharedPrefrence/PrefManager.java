@@ -12,14 +12,7 @@ public class PrefManager {
     private static final String PREF_NAME = "saleArt";
     private static final String USER_NAME = "name";
     private static final String USER_EMAIL = "email";
-    private static final String CATEGORY = "cate";
-    private static final String PROFILE = "profile";
-    private static final String DESCRIPTION = "description";
-    private static final String LIKES = "likes";
-    private static final String RATE = "rate";
     private static final String chooseClass = "class";
-    private static final String IS_SELLER = "isSeller";
-    private static final String IS_ORDER_FIRST_TIME = "isOrderFirstTime";
     private static final String Total_coins = "total_coins";
     private static final String Save_Email_InFo = "Email_info";
     private static final String user_name_info = "User_info";
@@ -28,12 +21,13 @@ public class PrefManager {
     private static final String Video_id = "Video_id";
     private static final String User_pic = "User_pic";
     private static final String Device_id = "Device_id";
-    private static final String Sub_videoid = "Sub_videoid";
     private static final String Web_time = "webtime";
     private static final String Web_Coin = "Web_coin";
     private static final String Web_url = "Web_url";
     private static final String id_user = "id_user";
     private static final String authKey = "authkey";
+    private static final String Correctans = "correct";
+    private static final String WrongAns = "wrongans";
     private Context context;
 
     public PrefManager(Context context) {
@@ -201,6 +195,25 @@ public class PrefManager {
 
         return sharedPreferences.getString(authKey,"0");
     }
+    public  void setCorrectans(String correctans)
+    {
+        editor.putString(Correctans,correctans);
+        editor.apply();
 
+    }
+    public  String getCorrectans() {
+
+        return sharedPreferences.getString(Correctans,"0");
+    }
+    public  void setWrongAns(String wrongAns)
+    {
+        editor.putString(WrongAns,wrongAns);
+        editor.apply();
+
+    }
+    public  String getWrongAns() {
+
+        return sharedPreferences.getString(WrongAns,"0");
+    }
 }
 

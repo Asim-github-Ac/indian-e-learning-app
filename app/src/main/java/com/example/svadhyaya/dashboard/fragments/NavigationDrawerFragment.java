@@ -86,6 +86,7 @@ public class NavigationDrawerFragment extends Fragment  {
                     SnackBar("Successfully Logout");
                     Intent intent=new Intent(getContext(), LoginWithPasswordActivity.class);
                     startActivity(intent);
+                    prefManager.setWeb_time("");
                 }else {
                     SnackBar("Try again please");
                     progressBar.setVisibility(View.INVISIBLE);

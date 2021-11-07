@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grayback"
-    >
+    android:background="@color/grayback">
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.021">
+        app:layout_constraintVertical_bias="0">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
             <TextView
@@ -88,39 +88,21 @@
                     tools:layout_editor_absoluteX="53dp"
                     tools:layout_editor_absoluteY="222dp" />
             </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/nextques"
+                    android:layout_width="280dp"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:text="Next"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                   android:background="@drawable/button"
+                    />
         </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:id="@+id/previousquestion"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:gravity="start"
-        android:text="Previous"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
-        app:layout_constraintStart_toStartOf="@+id/scrollView3"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3"
-        app:layout_constraintVertical_bias="1.0" />
-    <TextView
-        android:id="@+id/nextques"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="24dp"
-        android:gravity="end"
-        android:text="Next"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/previousquestion"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3"
-        app:layout_constraintVertical_bias="1.0" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -149,7 +131,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView14" />
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

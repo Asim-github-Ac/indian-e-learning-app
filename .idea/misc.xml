@@ -3,19 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/drawable-v24/edittext_back.xml" value="0.1609375" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/drawable/ic_group_680.xml" value="0.2890625" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/drawable/progress_icon.xml" value="0.2890625" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/activity_live_video_watch.xml" value="0.2604166666666667" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/activity_loading_lessons.xml" value="0.67" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/activity_login_with_password.xml" value="0.13272543059777103" />
+        <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/activity_main.xml" value="0.2675925925925926" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/activity_profile.xml" value="0.33" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/activity_splash_screen.xml" value="0.2513586956521739" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/activity_test.xml" value="0.2" />
+        <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/activity_test_intro.xml" value="0.24139492753623187" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/activity_triangle.xml" value="0.16" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/activity_video_view.xml" value="0.1381340579710145" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/dashboard_test_layout.xml" value="0.2" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/fragment_home.xml" value="0.13272543059777103" />
+        <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/fragment_math.xml" value="0.13272543059777103" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/fragment_navigation_drawer.xml" value="0.13272543059777103" />
+        <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/fragment_search_from_google.xml" value="0.16" />
+        <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/fragment_test_intro.xml" value="0.24139492753623187" />
+        <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/math_toolbar.xml" value="0.13272543059777103" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/subjectitemrecyclerview.xml" value="0.13272543059777103" />
         <entry key="..\:/Users/Asim Mehar/AndroidStudioProjects/Svadhyaya/app/src/main/res/layout/testitems.xml" value="0.16" />
       </map>

@@ -24,6 +24,7 @@ import com.example.svadhyaya.RetrofitModel.PakagesDetails;
 import com.example.svadhyaya.SharedPrefrence.PrefManager;
 import com.example.svadhyaya.dashboard.fragments.HomeFragment;
 import com.example.svadhyaya.dashboard.fragments.NavigationDrawerFragment;
+import com.example.svadhyaya.dashboard.fragments.SearchFromGoogleFrag;
 import com.example.svadhyaya.math.MathFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     getFragment(new MathFragment());
                     break;
                 case R.id.b_q_a:
+                    getFragment(new SearchFromGoogleFrag());
                     break;
             }
             return true;
