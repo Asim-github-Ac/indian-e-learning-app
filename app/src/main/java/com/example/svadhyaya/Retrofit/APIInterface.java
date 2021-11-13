@@ -2,6 +2,8 @@ package com.example.svadhyaya.Retrofit;
 
 import com.example.svadhyaya.RetrofitModel.ChanePassword;
 import com.example.svadhyaya.RetrofitModel.ContactUs;
+import com.example.svadhyaya.RetrofitModel.DashBoard;
+import com.example.svadhyaya.RetrofitModel.DashData;
 import com.example.svadhyaya.RetrofitModel.GetAllPackages;
 import com.example.svadhyaya.RetrofitModel.GetProfile;
 import com.example.svadhyaya.RetrofitModel.GetSubjects;
@@ -69,7 +71,32 @@ public interface APIInterface {
     //Step 15
     @POST("test/start_test")
     Call<Start_test> START_TEST_CALL(@Body Start_test start_test);
+    //Step16
+    @POST("dashboard")
+    Call<DashBoard> FetchDashBoard(@Body DashBoard dashBoard);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //Step 17
     @FormUrlEncoded
     @POST("auth/login")
     public void insertuser(

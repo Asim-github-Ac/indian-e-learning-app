@@ -78,13 +78,14 @@ public class Test_Index {
         public String subject_id;
         public String subject_name;
         public String srno;
-        public List<Object> exams;
+        @SerializedName("exams")
+        public List<Subject_Exams> Subject_Exams;
 
-        public Exam(String subject_id, String subject_name, String srno, List<Object> exams) {
+        public Exam(String subject_id, String subject_name, String srno, List<Subject_Exams> Subject_Exams) {
             this.subject_id = subject_id;
             this.subject_name = subject_name;
             this.srno = srno;
-            this.exams = exams;
+            this.Subject_Exams = Subject_Exams;
         }
 
         public String getSubject_id() {
@@ -111,12 +112,12 @@ public class Test_Index {
             this.srno = srno;
         }
 
-        public List<Object> getExams() {
-            return exams;
+        public List<com.example.svadhyaya.RetrofitModel.Subject_Exams> getSubject_Exams() {
+            return Subject_Exams;
         }
 
-        public void setExams(List<Object> exams) {
-            this.exams = exams;
+        public void setSubject_Exams(List<com.example.svadhyaya.RetrofitModel.Subject_Exams> subject_Exams) {
+            Subject_Exams = subject_Exams;
         }
     }
 
