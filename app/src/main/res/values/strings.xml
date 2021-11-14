@@ -13,6 +13,7 @@
     <string name="btn_reset_password">RESET PASSWORD</string>
     <string name="otp_send_to">OTP send to +91 9923235800</string>
     <string name="reset_svadhyaya_password">Reset Svadhyaya Password</string>
+    <string name="googleapi">AIzaSyAVhVvWsk1NM7hnS0EfAFNUV0pbfzrfBVE</string>
 
 
     <string-array name="navigation_drawer_items_array">

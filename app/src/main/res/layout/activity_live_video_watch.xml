@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".dashboard.activities.LiveVideoWatch">
-    <VideoView
-        android:id="@+id/b_video_library1"
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtubevideo"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -14,7 +14,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0">
+    </com.google.android.youtube.player.YouTubePlayerView>
     <ImageView
         android:id="@+id/livkvideo"
         android:layout_width="40dp"
@@ -24,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/b_video_library1"
+        app:layout_constraintTop_toBottomOf="@+id/youtubevideo"
         app:layout_constraintVertical_bias="0.016" />
 
     <ImageView
@@ -37,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/livkvideo"
-        app:layout_constraintTop_toBottomOf="@+id/b_video_library1"
+        app:layout_constraintTop_toBottomOf="@+id/youtubevideo"
         app:layout_constraintVertical_bias="0.016" />
 
     <TextView

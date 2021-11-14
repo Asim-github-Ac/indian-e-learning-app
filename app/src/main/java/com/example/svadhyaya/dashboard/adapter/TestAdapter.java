@@ -55,10 +55,23 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
         String str =questionList.getOptions().get(0).getOption();
         System.out.println("Before removing HTML Tags: " + str);
         str = str.replaceAll("\\<.*?\\>", "");
-        holder.option1.setText("a. "+str);
-        holder.option2.setText("b. "+questionList.getOptions().get(1).getOption_id());
-        holder.option3.setText("c. "+questionList.getOptions().get(2).getOption_id());
-        holder.option4.setText("d. "+questionList.getOptions().get(3).getOption_id());
+        String newstr= str.substring(5);
+        holder.option1.setText(newstr);
+        String str1 =questionList.getOptions().get(1).getOption();
+        System.out.println("Before removing HTML Tags: " + str1);
+        str1 = str1.replaceAll("\\<.*?\\>", "");
+        String newstr1= str1.substring(5);
+        holder.option2.setText(newstr1);
+        String str2 =questionList.getOptions().get(2).getOption();
+        System.out.println("Before removing HTML Tags: " + str2);
+        str2 = str2.replaceAll("\\<.*?\\>", "");
+        String newstr2= str2.substring(5);
+        holder.option3.setText(newstr2);
+        String str3 =questionList.getOptions().get(3).getOption();
+        System.out.println("Before removing HTML Tags: " + str3);
+        str3 = str3.replaceAll("\\<.*?\\>", "");
+        String newstr3= str3.substring(5);
+        holder.option4.setText(newstr3);
         progressDialog.dismiss();
         holder.option1.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
@@ -143,13 +156,26 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
                 if (j<questionListList.size() && j>=0) {
                     QuestionList questionListinner = questionListList.get(j);
                     holder.testquestion.setText(questionListinner.getQuestion());
-                    String str =questionList.getOptions().get(0).getOption();
+                    String str =questionListinner.getOptions().get(0).getOption();
                     System.out.println("Before removing HTML Tags: " + str);
                     str = str.replaceAll("\\<.*?\\>", "");
-                    holder.option1.setText("a "+str);
-                    holder.option2.setText("b "+questionListinner.getOptions().get(1).getOption_id());
-                    holder.option3.setText("c "+questionListinner.getOptions().get(2).getOption_id());
-                    holder.option4.setText("d "+questionListinner.getOptions().get(3).getOption_id());
+                    String newstr= str.substring(1);
+                    holder.option1.setText(newstr);
+                    String str1 =questionListinner.getOptions().get(1).getOption();
+                    System.out.println("Before removing HTML Tags: " + str1);
+                    str1 = str1.replaceAll("\\<.*?\\>", "");
+                    String newstr1= str1.substring(1);
+                    holder.option2.setText(newstr1);
+                    String str2 =questionListinner.getOptions().get(2).getOption();
+                    System.out.println("Before removing HTML Tags: " + str2);
+                    str2 = str2.replaceAll("\\<.*?\\>", "");
+                    String newstr2= str2.substring(1);
+                    holder.option3.setText(newstr2);
+                    String str3 =questionListinner.getOptions().get(3).getOption();
+                    System.out.println("Before removing HTML Tags: " + str3);
+                    str3 = str3.replaceAll("\\<.*?\\>", "");
+                    String newstr3= str3.substring(1);
+                    holder.option4.setText(newstr3);
                     j++;
                     holder.option1.setOnClickListener(new View.OnClickListener() {
                         @Override

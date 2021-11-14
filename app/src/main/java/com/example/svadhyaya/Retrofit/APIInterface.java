@@ -14,6 +14,7 @@ import com.example.svadhyaya.RetrofitModel.PakagesDetails;
 import com.example.svadhyaya.RetrofitModel.RegisterModel;
 import com.example.svadhyaya.RetrofitModel.Start_test;
 import com.example.svadhyaya.RetrofitModel.StudyMaterial;
+import com.example.svadhyaya.RetrofitModel.StudyMaterialFolder;
 import com.example.svadhyaya.RetrofitModel.Test_Index;
 import com.example.svadhyaya.RetrofitModel.UserLogin;
 
@@ -74,6 +75,11 @@ public interface APIInterface {
     //Step16
     @POST("dashboard")
     Call<DashBoard> FetchDashBoard(@Body DashBoard dashBoard);
+    //Step17
+    @POST("study_material")
+    Call<StudyMaterialFolder> studyFolder(@Body StudyMaterialFolder studyMaterialFolder);
+
+
 
 
 
