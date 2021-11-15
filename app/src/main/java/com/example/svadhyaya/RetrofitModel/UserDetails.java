@@ -17,7 +17,8 @@ public class UserDetails {
     String status;
     @SerializedName("profile_updated_status")
     String profilestatus;
-
+    @SerializedName("student_id")
+    String studentid;
 
 
     public   UserDetails(){
@@ -87,5 +88,12 @@ public class UserDetails {
 
     public void setProfilestatus(String profilestatus) {
         this.profilestatus = profilestatus;
+    }
+    public String getStudentid() {
+        return studentid;
+    }
+
+    public void setStudentid(String studentid) {
+        this.studentid = studentid;
     }
 }

@@ -32,6 +32,7 @@ import com.example.svadhyaya.R;
 import com.example.svadhyaya.Retrofit.APIClient;
 import com.example.svadhyaya.Retrofit.APIInterface;
 import com.example.svadhyaya.Retrofit.Constant;
+import com.example.svadhyaya.RetrofitModel.AddPackege;
 import com.example.svadhyaya.RetrofitModel.GetAllPackages;
 import com.example.svadhyaya.RetrofitModel.LiveClassRoom;
 import com.example.svadhyaya.RetrofitModel.PackageParts;
@@ -165,7 +166,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mClassTitle.setText(classTitle);
-                RefreshPkg(Constant.insituteId,classTitle);
+              //  RefreshPkg(Constant.insituteId,classTitle);
+                PackageAdded();
                 dialog.dismiss();
             }
         });
@@ -311,5 +313,35 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
         classList.clear();
+    }
+    public void PackageAdded(){
+        progressBar.setVisibility(View.VISIBLE);
+        constraintLayout.setVisibility(View.INVISIBLE);
+        final AddPackege addPackege=new AddPackege("79","1","1","1","2021-10-05","2021-10-05","1","1","1","1","2021-10-05","1","1");
+        Call<AddPackege> addPackegeCall=apiInterface.addpack(addPackege);
+        addPackegeCall.enqueue(new Callback<AddPackege>() {
+            @Override
+            public void onResponse(Call<AddPackege> call, Response<AddPackege> response) {
+                System.out.println("response"+response);
+                AddPackege addPackege1 = response.body();
+                System.out.println(addPackege1.getMessage());
+                if (addPackege1 !=null && addPackege1.getMessage().equals("Package Added") ) {
+                    System.out.println("pack added_________________");
+                    constraintLayout.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    System.out.println("live_____err");
+                    progressBar.setVisibility(View.INVISIBLE);
+                    constraintLayout.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AddPackege> call, Throwable t) {
+
+            }
+        });
+
     }
 }

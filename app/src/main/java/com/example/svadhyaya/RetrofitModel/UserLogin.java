@@ -68,7 +68,5 @@ public class UserLogin {
         return user;
     }
 
-    public void setUser(UserDetails user) {
-        this.user = user;
-    }
+
 }

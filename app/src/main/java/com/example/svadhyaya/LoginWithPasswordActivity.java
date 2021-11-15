@@ -34,7 +34,7 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     TextView signup;
     ProgressDialog progressDialog;
     String concode,newconcode,authkey;
-    String username,useremail;
+    String username,useremail,stdid;
     private CountryCodePicker codePicker;
     ConstraintLayout constraintLayout;
     APIInterface apiInterface;
@@ -106,6 +106,8 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
                        prefManager.setUserName(loginResponse.getUser().getName());
                        useremail=loginResponse.getUser().getEmaild();
                        prefManager.setUserEmail(useremail);
+                       stdid=loginResponse.getUser().getStudentid();
+                       prefManager.setStdid(stdid);
                        prefManager.setAuthKey(loginResponse.getUser().getAuthkey());
                        System.out.println("auth key iss -------"+loginResponse.getUser().getName());
                    }

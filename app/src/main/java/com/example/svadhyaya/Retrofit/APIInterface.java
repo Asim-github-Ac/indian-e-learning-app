@@ -1,5 +1,6 @@
 package com.example.svadhyaya.Retrofit;
 
+import com.example.svadhyaya.RetrofitModel.AddPackege;
 import com.example.svadhyaya.RetrofitModel.ChanePassword;
 import com.example.svadhyaya.RetrofitModel.ContactUs;
 import com.example.svadhyaya.RetrofitModel.DashBoard;
@@ -78,6 +79,10 @@ public interface APIInterface {
     //Step17
     @POST("study_material")
     Call<StudyMaterialFolder> studyFolder(@Body StudyMaterialFolder studyMaterialFolder);
+    //Step18
+
+    @POST("packages/add_package")
+    Call<AddPackege> addpack(@Body AddPackege addPackege);
 
 
 
