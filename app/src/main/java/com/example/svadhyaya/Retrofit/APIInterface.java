@@ -17,6 +17,8 @@ import com.example.svadhyaya.RetrofitModel.Start_test;
 import com.example.svadhyaya.RetrofitModel.StudyMaterial;
 import com.example.svadhyaya.RetrofitModel.StudyMaterialFolder;
 import com.example.svadhyaya.RetrofitModel.Test_Index;
+import com.example.svadhyaya.RetrofitModel.TopicData;
+import com.example.svadhyaya.RetrofitModel.TopicFolder;
 import com.example.svadhyaya.RetrofitModel.UserLogin;
 
 import java.util.List;
@@ -82,6 +84,9 @@ public interface APIInterface {
     //Step18
     @POST("packages/add_package")
     Call<AddPackege> addpack(@Body AddPackege addPackege);
+    //Step 19
+    @POST("study_material/folder")
+    Call<TopicFolder> topicfolder(@Body TopicFolder topicData);
 
 
 

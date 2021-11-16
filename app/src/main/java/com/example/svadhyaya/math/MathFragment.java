@@ -36,7 +36,7 @@ public class MathFragment extends Fragment {
     //toolbar
     ImageView upBtn;
     TextView subject;
-    String subjectname,subjectid;
+    String subjectname,subjectid,folderid;
     //1) proportions
     private RecyclerView proportionsRecyclerView;
     private List<ProportionsModel> proportionsList;
@@ -64,6 +64,7 @@ public class MathFragment extends Fragment {
         if(bundle != null) {
              subjectname = bundle.get("subj").toString();
             subjectid = bundle.get("subjectid").toString();
+            folderid=bundle.get("folderid").toString();
             Toast.makeText(getContext(), ""+subjectname, Toast.LENGTH_SHORT).show();
         }
         subject.setText(subjectname);
@@ -127,4 +128,5 @@ public class MathFragment extends Fragment {
         subject=view.findViewById(R.id.subjectnamefragment);
         upBtn = view.findViewById(R.id.math_up_btn);
     }
+
 }

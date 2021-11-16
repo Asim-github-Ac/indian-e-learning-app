@@ -17,6 +17,7 @@ import com.example.svadhyaya.R;
 import com.example.svadhyaya.RetrofitModel.StudyFolderList;
 import com.example.svadhyaya.RetrofitModel.StudyMaterialFolder;
 import com.example.svadhyaya.RetrofitModel.SubjectPackage;
+import com.example.svadhyaya.dashboard.fragments.TopicsFragments;
 import com.example.svadhyaya.math.MathFragment;
 
 import java.util.List;
@@ -47,6 +48,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectH
     public void onBindViewHolder(@NonNull SubjectAdapter.SubjectHolder holder, int position) {
         StudyFolderList getsubjects = getAllPackagesList.get(position);
         String subjectname= getsubjects.getFolder_name();
+        String folderid= getsubjects.getFolder_id();
 //       holder.LoadData(subjectname);
         if (subjectname.equals("Chemistry")){
             holder.subjecttext.setText(subjectname);
@@ -67,8 +69,9 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectH
            public void onClick(View view) {
                Bundle bundle = new Bundle();
                bundle.putString("subj",subjectname );
+               bundle.putString("folderid",folderid);
                bundle.putString("subjectid",getsubjects.getSubject_id());
-               MathFragment bookFragment = new MathFragment();
+               TopicsFragments bookFragment = new TopicsFragments();
                bookFragment.setArguments(bundle);
                AppCompatActivity activity = (AppCompatActivity) view.getContext();
                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, bookFragment).addToBackStack(null).commit();
