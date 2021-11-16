@@ -104,8 +104,8 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(manager);
         subjectPackageList=new ArrayList<>();
         GetPackages(Constant.insituteId);
-        GetStudyMaterial("57316020e03f24759dce0fedeab4caa6");
-        GetLiveClass("7c54f56b501c2f852676790165213c1b");
+        GetStudyMaterial(prefManager.getWeb_time());
+        GetLiveClass(prefManager.getWeb_time());
         Log.d("tag", "onCreateView: em"+prefManager.getSave_Email_InFo());
         //home_toolbar
         toolbarDrawer.setOnClickListener(new View.OnClickListener() {
@@ -322,7 +322,7 @@ public class HomeFragment extends Fragment {
     public void PackageAdded(){
         progressBar.setVisibility(View.VISIBLE);
         constraintLayout.setVisibility(View.INVISIBLE);
-        final AddPackege addPackege=new AddPackege("79",prefManager.getSelectedid(),"1","1","2021-10-05","2021-10-05","1","1","1","1","2021-10-05","1","1");
+        final AddPackege addPackege=new AddPackege(prefManager.getStdid(),prefManager.getSelectedid(),"1","1","2021-10-05","2021-10-05","1","1","1","1","2021-10-05","1","1");
         Call<AddPackege> addPackegeCall=apiInterface.addpack(addPackege);
         addPackegeCall.enqueue(new Callback<AddPackege>() {
             @Override

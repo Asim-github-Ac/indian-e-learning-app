@@ -62,7 +62,7 @@ public class TopicsFragments extends Fragment {
         }
         manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
-        GetTopics("57316020e03f24759dce0fedeab4caa6",folderid);
+        GetTopics(prefManager.getWeb_time(),folderid);
 
         return view;
     }

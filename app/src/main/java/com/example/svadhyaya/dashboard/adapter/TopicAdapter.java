@@ -50,7 +50,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicviewHol
         holder.topictext.setText(topicname);
         PrefManager prefManager=new PrefManager(context);
         APIInterface  apiInterface = APIClient.getClient().create(APIInterface.class);
-        final SubFolderMaterial subFolderMaterial=new SubFolderMaterial("57316020e03f24759dce0fedeab4caa6",folderid);
+        final SubFolderMaterial subFolderMaterial=new SubFolderMaterial(prefManager.getWeb_time(),folderid);
         Call<SubFolderMaterial> call=apiInterface.SUB_FOLDER_MATERIAL_CALL(subFolderMaterial);
         call.enqueue(new Callback<SubFolderMaterial>() {
             @Override
