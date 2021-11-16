@@ -16,6 +16,8 @@ import com.example.svadhyaya.RetrofitModel.RegisterModel;
 import com.example.svadhyaya.RetrofitModel.Start_test;
 import com.example.svadhyaya.RetrofitModel.StudyMaterial;
 import com.example.svadhyaya.RetrofitModel.StudyMaterialFolder;
+import com.example.svadhyaya.RetrofitModel.SubFolderMaterial;
+import com.example.svadhyaya.RetrofitModel.SubFolderdata;
 import com.example.svadhyaya.RetrofitModel.Test_Index;
 import com.example.svadhyaya.RetrofitModel.TopicData;
 import com.example.svadhyaya.RetrofitModel.TopicFolder;
@@ -87,6 +89,9 @@ public interface APIInterface {
     //Step 19
     @POST("study_material/folder")
     Call<TopicFolder> topicfolder(@Body TopicFolder topicData);
+    //Step 20
+    @POST("study_material/folder")
+    Call<SubFolderMaterial> SUB_FOLDER_MATERIAL_CALL(@Body SubFolderMaterial subFolderMaterial);
 
 
 

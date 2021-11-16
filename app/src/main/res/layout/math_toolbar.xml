@@ -64,7 +64,7 @@
             app:layout_constraintTop_toTopOf="@+id/library_icon" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/totaltopics"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -83,9 +83,9 @@
             android:fontFamily="@font/asap_regular"
             android:textSize="10sp"
             android:textColor="@color/text_link"
-            app:layout_constraintBottom_toBottomOf="@+id/textView14"
-            app:layout_constraintStart_toEndOf="@+id/textView14"
-            app:layout_constraintTop_toTopOf="@+id/textView14" />
+            app:layout_constraintBottom_toBottomOf="@+id/totaltopics"
+            app:layout_constraintStart_toEndOf="@+id/totaltopics"
+            app:layout_constraintTop_toTopOf="@+id/totaltopics" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

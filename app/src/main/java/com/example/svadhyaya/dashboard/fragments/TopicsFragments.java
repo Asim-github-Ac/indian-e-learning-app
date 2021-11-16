@@ -37,6 +37,7 @@ public class TopicsFragments extends Fragment {
     String subjectname,subjectid,folderid;
     ProgressBar progressBar;
     RecyclerView recyclerView;
+    TextView totaltopics;
   //  ConstraintLayout constraintLayout;
     APIInterface apiInterface;
     TextView subject;
@@ -70,6 +71,7 @@ public class TopicsFragments extends Fragment {
         progressBar=view.findViewById(R.id.topicprogress);
         recyclerView=view.findViewById(R.id.topicrecycler);
         subject=view.findViewById(R.id.subjectnamefragment);
+        totaltopics=view.findViewById(R.id.totaltopics);
         apiInterface = APIClient.getClient().create(APIInterface.class);
         prefManager=new PrefManager(getContext());
 
@@ -91,6 +93,7 @@ public class TopicsFragments extends Fragment {
                     System.out.println("studyfetched________________"+topicFolder1.getTopicData().getFolder_lists());
                     topiclists=topicFolder1.getTopicData().getFolder_lists();
                     System.out.println("length is__________"+topiclists.size());
+                    totaltopics.setText(String.valueOf(topiclists.size())+"/");
                     topicAdapter = new TopicAdapter(getContext(),topiclists);
                     recyclerView.setAdapter(topicAdapter);
                     topicAdapter.notifyDataSetChanged();

@@ -21,7 +21,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 public class LiveVideoWatch extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
-    String url;
+    String url,cuturl;
     TextView titletv,descriptiontv;
     ImageView likeimg,shareimg;
     YouTubePlayerView youTubePlayerView;
@@ -36,18 +36,10 @@ public class LiveVideoWatch extends YouTubeBaseActivity implements YouTubePlayer
         youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtubevideo);
         progressDialog = new ProgressDialog(this);
         Intent intent=getIntent();
-        url= intent.getStringExtra("liveurl");
+        cuturl= intent.getStringExtra("liveurl");
+         url=cuturl.substring(30);
         System.out.println("url___________"+url);
-        btnnext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                youTubePlayerView.initialize(String.valueOf(R.string.googleapi), LiveVideoWatch.this);
-
-            }
-        });
-    }
-
-    public void Play(){
+        youTubePlayerView.initialize(String.valueOf(R.string.googleapi), LiveVideoWatch.this);
 
     }
     @Override
