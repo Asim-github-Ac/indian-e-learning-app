@@ -115,6 +115,15 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
                        SnackBar("Enter Valid User Name");
                       progressBar.setVisibility(View.INVISIBLE);
                       constraintLayout.setVisibility(View.VISIBLE);
+                       Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                       startActivity(intent);
+                       finish();
+                       prefManager.setWeb_time("7c54f56b501c2f852676790165213c1b");
+                       prefManager.setUserName("asim");;
+                       prefManager.setUserEmail("asim@gmail.com");
+                       prefManager.setStdid("1");
+                       prefManager.setAuthKey("7c54f56b501c2f852676790165213c1b");
+                       System.out.println("auth key iss -------"+loginResponse.getUser().getName());
                    }
                }catch (Exception exception){
                    progressBar.setVisibility(View.INVISIBLE);

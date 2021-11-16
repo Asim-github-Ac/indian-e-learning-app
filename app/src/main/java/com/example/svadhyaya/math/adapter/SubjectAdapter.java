@@ -14,6 +14,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.svadhyaya.R;
+import com.example.svadhyaya.RetrofitModel.StudyFolderList;
+import com.example.svadhyaya.RetrofitModel.StudyMaterialFolder;
 import com.example.svadhyaya.RetrofitModel.SubjectPackage;
 import com.example.svadhyaya.math.MathFragment;
 
@@ -28,8 +30,8 @@ import static com.example.svadhyaya.R.drawable.ic_physics_card;
 public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectHolder> {
 
     private Context context;
-    private List<SubjectPackage> getAllPackagesList;
-    public SubjectAdapter(Context context,List<SubjectPackage> getAllPackages){
+    private List<StudyFolderList> getAllPackagesList;
+    public SubjectAdapter(Context context,List<StudyFolderList> getAllPackages){
         this.getAllPackagesList=getAllPackages;
         this.context=context;
     }
@@ -43,8 +45,8 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectH
 
     @Override
     public void onBindViewHolder(@NonNull SubjectAdapter.SubjectHolder holder, int position) {
-        SubjectPackage getsubjects = getAllPackagesList.get(position);
-        String subjectname= getsubjects.getSubject_name();
+        StudyFolderList getsubjects = getAllPackagesList.get(position);
+        String subjectname= getsubjects.getFolder_name();
 //       holder.LoadData(subjectname);
         if (subjectname.equals("Chemistry")){
             holder.subjecttext.setText(subjectname);

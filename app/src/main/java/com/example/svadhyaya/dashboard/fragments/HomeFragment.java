@@ -36,6 +36,8 @@ import com.example.svadhyaya.RetrofitModel.AddPackege;
 import com.example.svadhyaya.RetrofitModel.GetAllPackages;
 import com.example.svadhyaya.RetrofitModel.LiveClassRoom;
 import com.example.svadhyaya.RetrofitModel.PackageParts;
+import com.example.svadhyaya.RetrofitModel.StudyFolderList;
+import com.example.svadhyaya.RetrofitModel.StudyMaterialFolder;
 import com.example.svadhyaya.RetrofitModel.SubjectPackage;
 import com.example.svadhyaya.SharedPrefrence.PrefManager;
 import com.example.svadhyaya.dashboard.activities.MainActivity;
@@ -63,18 +65,18 @@ public class HomeFragment extends Fragment {
     private AlertDialog dialog;
     private ArrayList<ClassDialogModel> classList = new ArrayList<>();
     private ClassDialogAdapter classAdapter;
-    private String classTitle;
+    private String classTitle,listpackid;
     PrefManager prefManager;
     APIInterface apiInterface;
     ConstraintLayout constraintLayout;
-    String packagename,checkpackname;
+    String packagename,packageid,checkpackname;
     ConstraintLayout constraintLayoutexams;
     ArrayList<String> subjectlist= new ArrayList<>();
     List<PackageParts> allsubj= new ArrayList<>();
     //subject adapter
     RecyclerView recyclerView;
     private SubjectAdapter subjectAdapter;
-    List<SubjectPackage> subjectPackageList;
+    List<StudyFolderList> subjectPackageList;
     GridLayoutManager manager;
 //dialouge
     //live lessons
@@ -89,8 +91,9 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initView(view);
-        apiInterface = APIClient.getClient().create(APIInterface.class);
         prefManager=new PrefManager(getContext());
+        mClassTitle.setText(prefManager.getPackname());
+        apiInterface = APIClient.getClient().create(APIInterface.class);
         //my live lesson
         liveLessonLayoutManager = new LinearLayoutManager(getContext());
         liveLessonLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
@@ -101,6 +104,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(manager);
         subjectPackageList=new ArrayList<>();
         GetPackages(Constant.insituteId);
+        GetStudyMaterial("57316020e03f24759dce0fedeab4caa6");
         GetLiveClass("7c54f56b501c2f852676790165213c1b");
         Log.d("tag", "onCreateView: em"+prefManager.getSave_Email_InFo());
         //home_toolbar
@@ -158,6 +162,9 @@ public class HomeFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 ClassDialogModel classDialogModel = (ClassDialogModel) adapterView.getAdapter().getItem(i);
                 classTitle = classDialogModel.getTitle();
+                listpackid = classDialogModel.getPackid();
+                prefManager.setSelectedid(listpackid);
+                prefManager.setPackname(classTitle);
                 prefManager.setList_size(String.valueOf(i));
                 Toast.makeText(getContext(), ""+classTitle, Toast.LENGTH_SHORT).show();
             }
@@ -165,7 +172,7 @@ public class HomeFragment extends Fragment {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mClassTitle.setText(classTitle);
+                mClassTitle.setText(prefManager.getPackname());
               //  RefreshPkg(Constant.insituteId,classTitle);
                 PackageAdded();
                 dialog.dismiss();
@@ -202,7 +209,8 @@ public class HomeFragment extends Fragment {
                     System.out.println("list size is    ==="+getAllPackages1.getAllpageslist().size());
                     for (int i = 0;i<getAllPackages1.getAllpageslist().size();i++) {
                         packagename=getAllPackages1.getAllpageslist().get(i).getPackage_name();
-                        classList.add(new ClassDialogModel(packagename));
+                        packageid=getAllPackages1.getAllpageslist().get(i).getPackage_id();
+                        classList.add(new ClassDialogModel(packagename,packageid));
                         subjectlist.add(getAllPackages1.getAllpageslist().get(i).getPackage_name());
                     }
                     progressBar.setVisibility(View.INVISIBLE);
@@ -242,10 +250,7 @@ public class HomeFragment extends Fragment {
                             System.out.println("your subject is_________"+getAllPackages1.getAllpageslist().get(Integer.parseInt(prefManager.getList_size())).getSubjectClasses().get(0).getSubject_name());
                             progressBar.setVisibility(View.INVISIBLE);
                             constraintLayout.setVisibility(View.VISIBLE);
-                            subjectPackageList=getAllPackages1.getAllpageslist().get(Integer.parseInt(prefManager.getList_size())).getSubjectClasses();
-                            subjectAdapter = new SubjectAdapter(getContext(),subjectPackageList);
-                            recyclerView.setAdapter(subjectAdapter);
-                            subjectAdapter.notifyDataSetChanged();
+
                         }
                         else {
                             System.out.println("nothing found____+++++++");
@@ -317,7 +322,7 @@ public class HomeFragment extends Fragment {
     public void PackageAdded(){
         progressBar.setVisibility(View.VISIBLE);
         constraintLayout.setVisibility(View.INVISIBLE);
-        final AddPackege addPackege=new AddPackege("79","1","1","1","2021-10-05","2021-10-05","1","1","1","1","2021-10-05","1","1");
+        final AddPackege addPackege=new AddPackege("79",prefManager.getSelectedid(),"1","1","2021-10-05","2021-10-05","1","1","1","1","2021-10-05","1","1");
         Call<AddPackege> addPackegeCall=apiInterface.addpack(addPackege);
         addPackegeCall.enqueue(new Callback<AddPackege>() {
             @Override
@@ -343,5 +348,38 @@ public class HomeFragment extends Fragment {
             }
         });
 
+    }
+    public void  GetStudyMaterial(String authkey){
+        progressBar.setVisibility(View.VISIBLE);
+        constraintLayout.setVisibility(View.INVISIBLE);
+        final StudyMaterialFolder studyMaterialFolder=new StudyMaterialFolder(authkey);
+        Call<StudyMaterialFolder> call=apiInterface.studyFolder(studyMaterialFolder);
+        call.enqueue(new Callback<StudyMaterialFolder>() {
+            @Override
+            public void onResponse(Call<StudyMaterialFolder> call, Response<StudyMaterialFolder> response) {
+                System.out.println("study_material_fetched"+response);
+                StudyMaterialFolder studyMaterialFolder1 = response.body();
+                System.out.println(studyMaterialFolder1.getMessage());
+                if (studyMaterialFolder1 !=null && studyMaterialFolder1.getStatus().equals("true") ) {
+                    System.out.println("studyfetched________________");
+                    subjectPackageList=studyMaterialFolder1.getData();
+                    subjectAdapter = new SubjectAdapter(getContext(),subjectPackageList);
+                    recyclerView.setAdapter(subjectAdapter);
+                    subjectAdapter.notifyDataSetChanged();
+                    constraintLayout.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    System.out.println("live_____err");
+                    progressBar.setVisibility(View.INVISIBLE);
+                    constraintLayout.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StudyMaterialFolder> call, Throwable t) {
+
+            }
+        });
     }
 }

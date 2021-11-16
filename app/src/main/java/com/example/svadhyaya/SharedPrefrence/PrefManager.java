@@ -28,8 +28,9 @@ public class PrefManager {
     private static final String authKey = "authkey";
     private static final String Correctans = "correct";
     private static final String WrongAns = "wrongans";
-    private static final String Stdid = "correct";
-    private static final String Selectedid = "wrongans";
+    private static final String Stdid = "stdids";
+    private static final String Selectedid = "selectedid";
+    private static final String Packname = "packname";
     private Context context;
 
     public PrefManager(Context context) {
@@ -236,6 +237,16 @@ public class PrefManager {
     public  String getSelectedid() {
 
         return sharedPreferences.getString(Selectedid,"0");
+    }
+    public  void setPackname(String packname)
+    {
+        editor.putString(Packname,packname);
+        editor.apply();
+
+    }
+    public  String getPackname() {
+
+        return sharedPreferences.getString(Packname,"0");
     }
 }
 

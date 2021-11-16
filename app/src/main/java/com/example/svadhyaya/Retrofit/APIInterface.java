@@ -80,7 +80,6 @@ public interface APIInterface {
     @POST("study_material")
     Call<StudyMaterialFolder> studyFolder(@Body StudyMaterialFolder studyMaterialFolder);
     //Step18
-
     @POST("packages/add_package")
     Call<AddPackege> addpack(@Body AddPackege addPackege);
 
