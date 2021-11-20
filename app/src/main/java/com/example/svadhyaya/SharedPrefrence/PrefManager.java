@@ -31,6 +31,9 @@ public class PrefManager {
     private static final String Stdid = "stdids";
     private static final String Selectedid = "selectedid";
     private static final String Packname = "packname";
+    private static final String Subjectnamevideo = "subjname";
+    private static final String Subjidvideo = "subjectid";
+    private static final String Folderid = "foldername";
     private Context context;
 
     public PrefManager(Context context) {
@@ -247,6 +250,35 @@ public class PrefManager {
     public  String getPackname() {
 
         return sharedPreferences.getString(Packname,"0");
+    }
+    public  void setSubjectnamevideo(String subjectname)
+    {
+        editor.putString(Subjectnamevideo,subjectname);
+        editor.apply();
+
+    }
+    public  String getSubjectnamevideo() {
+        return sharedPreferences.getString(Subjectnamevideo,"0");
+    }
+    public  void setSubjidvideo(String subjid)
+    {
+        editor.putString(Subjidvideo,subjid);
+        editor.apply();
+
+    }
+    public  String getSubjidvideo() {
+
+        return sharedPreferences.getString(Subjidvideo,"0");
+    }
+    public  void setFolderid(String folderid)
+    {
+        editor.putString(Folderid,folderid);
+        editor.apply();
+
+    }
+    public  String getFolderid() {
+
+        return sharedPreferences.getString(Folderid,"0");
     }
 }
 

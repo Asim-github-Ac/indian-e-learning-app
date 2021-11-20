@@ -29,7 +29,7 @@ public class SubFolderAdapter extends RecyclerView.Adapter<SubFolderAdapter.Subf
     @NonNull
     @Override
     public SubFolderAdapter.SubfolderHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.math_proportions_items,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.topics_items,parent,false);
         return new SubFolderAdapter.SubfolderHolder(view);
     }
 

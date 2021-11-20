@@ -30,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private int account_type_spinner_value_position;
     EditText fname,mname,lname,email,password,birthday,mobile,address,city,state,country,parentcontact,parentemail;
     Button signup;
+    ProgressDialog progressDialog;
     private CountryCodePicker codePicker;
     APIInterface apiInterface;
     @Override
@@ -78,9 +79,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
   public void SignUpNow(String fname,String mname,String lname,String email,String pass,String gender,String Bday,String mobile,String addres,String cityy,String statee,String countryy,String parecon,String parentemaills  ){
-      final ProgressDialog progressDialog = new ProgressDialog(this);
-      progressDialog.setMessage("Loading...");
+      progressDialog = new ProgressDialog(this);
       progressDialog.show();
+      progressDialog.setContentView(R.layout.customprogress);
+      progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
       System.out.println("code   "+mobile);
         final RegisterModel registerModel= new RegisterModel(fname,mname,lname,email,pass,gender,Bday,mobile,addres,cityy,statee,countryy,parecon,parentemaills);
       Call<RegisterModel> call = apiInterface.createUser(registerModel);
@@ -137,5 +139,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
       });
   }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        progressDialog.dismiss();
+    }
 }

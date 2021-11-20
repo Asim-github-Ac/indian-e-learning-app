@@ -1,5 +1,6 @@
 package com.example.svadhyaya.dashboard.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -35,7 +36,7 @@ import retrofit2.Response;
 
 public class TopicsFragments extends Fragment {
     String subjectname,subjectid,folderid;
-    ProgressBar progressBar;
+    ProgressDialog progressDialog;
     RecyclerView recyclerView;
     TextView totaltopics;
   //  ConstraintLayout constraintLayout;
@@ -59,16 +60,20 @@ public class TopicsFragments extends Fragment {
             subjectname = bundle.get("subj").toString();
             subjectid = bundle.get("subjectid").toString();
             folderid=bundle.get("folderid").toString();
+            prefManager.setSubjectnamevideo(subjectname);
+            prefManager.setSubjidvideo(subjectid);
+            prefManager.setFolderid(folderid);
+
+
         }
         manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
-        GetTopics(prefManager.getWeb_time(),folderid);
+        GetTopics(prefManager.getWeb_time(),prefManager.getFolderid());
 
         return view;
     }
     public void initilization(View view){
       //  constraintLayout=view.findViewById(R.id.constraintsvisible);
-        progressBar=view.findViewById(R.id.topicprogress);
         recyclerView=view.findViewById(R.id.topicrecycler);
         subject=view.findViewById(R.id.subjectnamefragment);
         totaltopics=view.findViewById(R.id.totaltopics);
@@ -77,8 +82,12 @@ public class TopicsFragments extends Fragment {
 
     }
     public void GetTopics(String authkey,String folderid){
-        progressBar.setVisibility(View.VISIBLE);
-        subject.setText(subjectname);
+        progressDialog=new ProgressDialog(getContext());
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.home_dialog);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        subject.setText(prefManager.getSubjectnamevideo());
       //  constraintLayout.setVisibility(View.INVISIBLE);
         final TopicFolder topicFolder=new TopicFolder(authkey,folderid);
         Call<TopicFolder> call=apiInterface.topicfolder(topicFolder);
@@ -88,7 +97,6 @@ public class TopicsFragments extends Fragment {
                 System.out.println("topicfolder fetched"+response);
                 TopicFolder topicFolder1 = response.body();
                 System.out.println(topicFolder1.getMessage());
-
                 if (topicFolder1 !=null && topicFolder1.getStatus().equals("true") ) {
                     System.out.println("studyfetched________________"+topicFolder1.getTopicData().getFolder_lists());
                     topiclists=topicFolder1.getTopicData().getFolder_lists();
@@ -98,21 +106,25 @@ public class TopicsFragments extends Fragment {
                     recyclerView.setAdapter(topicAdapter);
                     topicAdapter.notifyDataSetChanged();
                    //   constraintLayout.setVisibility(View.VISIBLE);
-                      progressBar.setVisibility(View.INVISIBLE);
+                     progressDialog.dismiss();
 
                 }
                 else{
                     System.out.println("live_____err");
-                    progressBar.setVisibility(View.INVISIBLE);
+                    progressDialog.dismiss();
                    // constraintLayout.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<TopicFolder> call, Throwable t) {
-
+            progressDialog.dismiss();
             }
         });
     }
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        progressDialog.dismiss();
+    }
 }

@@ -61,14 +61,13 @@ public class HomeFragment extends Fragment {
     private TextView toolbarTitle;
     private CardView openCustomDialog;
     private TextView mClassTitle;
-    ProgressBar progressBar;
+    ProgressDialog progressDialog;
     private AlertDialog dialog;
     private ArrayList<ClassDialogModel> classList = new ArrayList<>();
     private ClassDialogAdapter classAdapter;
     private String classTitle,listpackid;
     PrefManager prefManager;
     APIInterface apiInterface;
-    ConstraintLayout constraintLayout;
     String packagename,packageid,checkpackname;
     ConstraintLayout constraintLayoutexams;
     ArrayList<String> subjectlist= new ArrayList<>();
@@ -143,8 +142,6 @@ public class HomeFragment extends Fragment {
         // subject recyclerview
         recyclerView=view.findViewById(R.id.subjectrecyclerview);
         constraintLayoutexams=view.findViewById(R.id.constaintsexams);
-        progressBar=view.findViewById(R.id.progresshome);
-        constraintLayout=view.findViewById(R.id.constrainshome);
         //video library
      //   mathCard = view.findViewById(R.id.math_card);
     }
@@ -195,8 +192,11 @@ public class HomeFragment extends Fragment {
         dialog.getWindow().getDecorView().setBackgroundDrawable(background);
     }
     public  void  GetPackages(String authkey){
-        progressBar.setVisibility(View.VISIBLE);
-        constraintLayout.setVisibility(View.INVISIBLE);
+        ProgressDialog progressDialog2=new ProgressDialog(getContext());
+        progressDialog2.show();
+        progressDialog2.setContentView(R.layout.customprogress);
+        progressDialog2.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         final GetAllPackages getAllPackages=new GetAllPackages(authkey);
         Call<GetAllPackages> call=apiInterface.getpackages(getAllPackages);
         call.enqueue(new Callback<GetAllPackages>() {
@@ -214,73 +214,26 @@ public class HomeFragment extends Fragment {
                         classList.add(new ClassDialogModel(packagename,packageid));
                         subjectlist.add(getAllPackages1.getAllpageslist().get(i).getPackage_name());
                     }
-                    progressBar.setVisibility(View.INVISIBLE);
-                    constraintLayout.setVisibility(View.VISIBLE);
+                   progressDialog2.dismiss();
                 }
                 else
                 {
                     System.out.println("else part __"+response);
-                    progressBar.setVisibility(View.INVISIBLE);
-                    constraintLayout.setVisibility(View.VISIBLE);
+                  progressDialog2.dismiss();
                 }
             }
             @Override
             public void onFailure(Call<GetAllPackages> call, Throwable t) {
-                progressBar.setVisibility(View.INVISIBLE);
-                constraintLayout.setVisibility(View.VISIBLE);
+               progressDialog2.dismiss();
                 System.out.println("error failer" +t.getMessage());
             }
         });
     }
-    public  void  RefreshPkg(String authkey,String pkgname){
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressBar.setVisibility(View.VISIBLE);
-        constraintLayout.setVisibility(View.INVISIBLE);
-        final GetAllPackages getAllPackages=new GetAllPackages(authkey);
-        Call<GetAllPackages> call=apiInterface.getpackages(getAllPackages);
-        call.enqueue(new Callback<GetAllPackages>() {
-            @Override
-            public void onResponse(Call<GetAllPackages> call, Response<GetAllPackages> response) {
-                System.out.println("response"+response);
-                GetAllPackages getAllPackages1 = response.body();
-                System.out.println(getAllPackages1.getMessage());
-                try {
-                    if (getAllPackages1 !=null && getAllPackages1.getStatus().equals("true")){
-                        allsubj=getAllPackages1.getAllpageslist();
-                        if (pkgname.equals(getAllPackages1.getAllpageslist().get(Integer.parseInt(prefManager.getList_size())).getPackage_name())){
-                            System.out.println("your subject is_________"+getAllPackages1.getAllpageslist().get(Integer.parseInt(prefManager.getList_size())).getSubjectClasses().get(0).getSubject_name());
-                            progressBar.setVisibility(View.INVISIBLE);
-                            constraintLayout.setVisibility(View.VISIBLE);
-
-                        }
-                        else {
-                            System.out.println("nothing found____+++++++");
-                            progressBar.setVisibility(View.INVISIBLE);
-                            constraintLayout.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    else
-                    {
-                        System.out.println("else part __"+response.message());
-                        progressBar.setVisibility(View.INVISIBLE);
-                        constraintLayout.setVisibility(View.VISIBLE);
-                    }
-                }catch (Exception exception){
-                    System.out.println("catch Block Something Wrong___________"+exception.getMessage());
-                    progressBar.setVisibility(View.INVISIBLE);
-                    constraintLayout.setVisibility(View.VISIBLE);
-                }
-            }
-            @Override
-            public void onFailure(Call<GetAllPackages> call, Throwable t) {
-                progressBar.setVisibility(View.INVISIBLE);
-                constraintLayout.setVisibility(View.VISIBLE);
-                System.out.println("error failer" +call.clone());
-            }
-        });
-    }
     public void GetLiveClass(String authkey){
-      progressBar.setVisibility(View.VISIBLE);
+        ProgressDialog progressDialog1=new ProgressDialog(getContext());
+        progressDialog1.show();
+        progressDialog1.setContentView(R.layout.home_dialog);
+        progressDialog1.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         final LiveClassRoom liveClassRoom=new LiveClassRoom(authkey);
         Call<LiveClassRoom> call=apiInterface.LIVE_CLASS_ROOM_CALL(liveClassRoom);
         call.enqueue(new Callback<LiveClassRoom>() {
@@ -297,16 +250,16 @@ public class HomeFragment extends Fragment {
                     liveLessonAdapter = new LiveLessonAdapter(getContext(),liveClassList3s);
                     liveLessonRecyclerView.setAdapter(liveLessonAdapter);
                     liveLessonAdapter.notifyDataSetChanged();
-                    progressBar.setVisibility(View.INVISIBLE);
+                    progressDialog1.dismiss();
                 }
                 else{
                     System.out.println("live_____err");
-                    progressBar.setVisibility(View.INVISIBLE);
+                    progressDialog1.dismiss();
                 }
             }
             @Override
             public void onFailure(Call<LiveClassRoom> call, Throwable t) {
-                progressBar.setVisibility(View.INVISIBLE);
+                progressDialog1.dismiss();
             }
         });
     }
@@ -321,8 +274,11 @@ public class HomeFragment extends Fragment {
         classList.clear();
     }
     public void PackageAdded(){
-        progressBar.setVisibility(View.VISIBLE);
-        constraintLayout.setVisibility(View.INVISIBLE);
+        progressDialog=new ProgressDialog(getContext());
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.home_dialog);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         final AddPackege addPackege=new AddPackege(prefManager.getStdid(),prefManager.getSelectedid(),"1","1","2021-10-05","2021-10-05","1","1","1","1","2021-10-05","1","1");
         Call<AddPackege> addPackegeCall=apiInterface.addpack(addPackege);
         addPackegeCall.enqueue(new Callback<AddPackege>() {
@@ -333,13 +289,11 @@ public class HomeFragment extends Fragment {
                 System.out.println(addPackege1.getMessage());
                 if (addPackege1 !=null && addPackege1.getMessage().equals("Package Added") ) {
                     System.out.println("pack added_________________");
-                    constraintLayout.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.INVISIBLE);
+                   progressDialog.dismiss();
                 }
                 else{
                     System.out.println("live_____err");
-                    progressBar.setVisibility(View.INVISIBLE);
-                    constraintLayout.setVisibility(View.VISIBLE);
+                progressDialog.dismiss();
                 }
             }
 
@@ -351,8 +305,11 @@ public class HomeFragment extends Fragment {
 
     }
     public void  GetStudyMaterial(String authkey){
-        progressBar.setVisibility(View.VISIBLE);
-        constraintLayout.setVisibility(View.INVISIBLE);
+        ProgressDialog progressDialog3=new ProgressDialog(getContext());
+        progressDialog3.show();
+        progressDialog3.setContentView(R.layout.home_dialog);
+        progressDialog3.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         final StudyMaterialFolder studyMaterialFolder=new StudyMaterialFolder(authkey);
         Call<StudyMaterialFolder> call=apiInterface.studyFolder(studyMaterialFolder);
         call.enqueue(new Callback<StudyMaterialFolder>() {
@@ -367,19 +324,17 @@ public class HomeFragment extends Fragment {
                     subjectAdapter = new SubjectAdapter(getContext(),subjectPackageList);
                     recyclerView.setAdapter(subjectAdapter);
                     subjectAdapter.notifyDataSetChanged();
-                    constraintLayout.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.INVISIBLE);
+                   progressDialog3.dismiss();
                 }
                 else{
                     System.out.println("live_____err");
-                    progressBar.setVisibility(View.INVISIBLE);
-                    constraintLayout.setVisibility(View.VISIBLE);
+                    progressDialog3.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<StudyMaterialFolder> call, Throwable t) {
-
+        progressDialog3.dismiss();
             }
         });
     }

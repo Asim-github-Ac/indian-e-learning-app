@@ -42,10 +42,10 @@ public class NavigationDrawerFragment extends Fragment  {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     Button logout;
+    ProgressDialog progressDialog;
     TextView profilename,viewprofile;
     CircleImageView profilepic;
     PrefManager prefManager;
-    ProgressBar progressBar;
     APIInterface apiInterface;
     LinearLayout linearLayoutlogout;
     @Override
@@ -55,6 +55,8 @@ public class NavigationDrawerFragment extends Fragment  {
         apiInterface = APIClient.getClient().create(APIInterface.class);
         initilization(view);
         setUpRecyclerView(view);
+        progressDialog=new ProgressDialog(getContext());
+
         viewprofile.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
@@ -73,7 +75,10 @@ public class NavigationDrawerFragment extends Fragment  {
         return view;
     }
     public void LogoutFun(String authkey){
-       progressBar.setVisibility(View.VISIBLE);
+
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.home_dialog);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         final LogOut logOut=new LogOut(authkey);
         Call<LogOut> call=apiInterface.Logout(logOut);
         call.enqueue(new Callback<LogOut>() {
@@ -89,14 +94,14 @@ public class NavigationDrawerFragment extends Fragment  {
                     prefManager.setWeb_time("");
                 }else {
                     SnackBar("Try again please");
-                    progressBar.setVisibility(View.INVISIBLE);
+                   progressDialog.dismiss();
                 }
             }
             @Override
             public void onFailure(Call<LogOut> call, Throwable t) {
                 System.out.println("errorss" +t.getMessage());
                 SnackBar("Something Wrong");
-               progressBar.setVisibility(View.INVISIBLE);
+               progressDialog.dismiss();
             }
         });
     }
@@ -143,7 +148,6 @@ public class NavigationDrawerFragment extends Fragment  {
         profilename=view.findViewById(R.id.profilename);
         viewprofile=view.findViewById(R.id.viewprofile);
         profilepic=view.findViewById(R.id.profilepic);
-        progressBar=view.findViewById(R.id.progressbarnav);
         viewprofile.setClickable(true);
         linearLayoutlogout=view.findViewById(R.id.linearlayoutlogout);
         profilename.setText(prefManager.getUserName());
@@ -159,5 +163,17 @@ public class NavigationDrawerFragment extends Fragment  {
                     }
                 });
         snackbar.show();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        progressDialog.dismiss();
     }
 }

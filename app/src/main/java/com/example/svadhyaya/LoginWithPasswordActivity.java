@@ -2,6 +2,8 @@ package com.example.svadhyaya;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -37,7 +39,7 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     ConstraintLayout constraintLayout;
     APIInterface apiInterface;
     PrefManager prefManager;
-    ProgressBar progressBar;
+    ProgressDialog progressDialog;
     int i = 0;
     Handler handler = new Handler();
     @Override
@@ -45,6 +47,7 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_with_password);
         init();
+
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
         prefManager=new PrefManager(this);
@@ -60,7 +63,6 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
         codePicker=findViewById(R.id.ccp);
         constraintLayout=findViewById(R.id.constraintLayout1);
         signup=findViewById(R.id.Signup);
-        progressBar = findViewById(R.id.progresslogin);
     }
 
     @Override
@@ -81,8 +83,11 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     public void SignIn(String username,String password){
         System.out.println("code"+username.toString());
 
-        progressBar.setVisibility(View.VISIBLE);
-        constraintLayout.setVisibility(View.INVISIBLE);
+        progressDialog=new ProgressDialog(this);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.customprogress);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         final UserDetails userDetails=new UserDetails();
         final UserLogin userLogin=new UserLogin(username,password,"23");
         Call<UserLogin>  call= apiInterface.userlogin(userLogin);
@@ -100,7 +105,7 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
                        finish();
                        authkey=loginResponse.getUser().getAuthkey();
                        prefManager.setWeb_time(authkey);
-                       prefManager.setUserName(loginResponse.getUser().getName());
+                        prefManager.setUserName(loginResponse.getUser().getName());
                        useremail=loginResponse.getUser().getEmaild();
                        prefManager.setUserEmail(useremail);
                        stdid=loginResponse.getUser().getStudentid();
@@ -110,18 +115,16 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
                    }
                    else {
                        SnackBar("Enter Valid User Name");
-                      progressBar.setVisibility(View.INVISIBLE);
-                      constraintLayout.setVisibility(View.VISIBLE);
+                        progressDialog.dismiss();
                    }
                }catch (Exception exception){
-                   progressBar.setVisibility(View.INVISIBLE);
-                   constraintLayout.setVisibility(View.VISIBLE);
+                   progressDialog.dismiss();
                }
             }
             @Override
             public void onFailure(Call<UserLogin> call, Throwable t) {
                 SnackBar("Something Wrong");
-                constraintLayout.setVisibility(View.VISIBLE);
+                progressDialog.dismiss();
                 System.out.println("failer errors is "+t.getMessage());
             }
         });
@@ -138,12 +141,15 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
                 });
         snackbar.show();
     }
-    public void SecondMethod(String uname,String pass){
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        progressBar.setVisibility(View.INVISIBLE);
+        progressDialog.dismiss();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        progressDialog.dismiss();
     }
 }

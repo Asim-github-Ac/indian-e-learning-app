@@ -25,6 +25,7 @@ import com.example.svadhyaya.SharedPrefrence.PrefManager;
 import com.example.svadhyaya.dashboard.fragments.HomeFragment;
 import com.example.svadhyaya.dashboard.fragments.NavigationDrawerFragment;
 import com.example.svadhyaya.dashboard.fragments.SearchFromGoogleFrag;
+import com.example.svadhyaya.dashboard.fragments.TopicsFragments;
 import com.example.svadhyaya.math.MathFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case R.id.b_live_lessons:
                     break;
                 case R.id.b_video_library:
-                    getFragment(new MathFragment());
+                    getFragment(new TopicsFragments());
                     break;
                 case R.id.b_q_a:
                     getFragment(new SearchFromGoogleFrag());
