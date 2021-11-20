@@ -2,9 +2,8 @@ package com.example.svadhyaya;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
-import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -32,7 +31,6 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     private Button btnNext;
     private EditText etPhoneNum,etPassword;
     TextView signup;
-    ProgressDialog progressDialog;
     String concode,newconcode,authkey;
     String username,useremail,stdid;
     private CountryCodePicker codePicker;
@@ -46,8 +44,8 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_with_password);
-         progressDialog = new ProgressDialog(this);
         init();
+
         apiInterface = APIClient.getClient().create(APIInterface.class);
         prefManager=new PrefManager(this);
         btnNext.setOnClickListener(this);
@@ -82,8 +80,7 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
     }
     public void SignIn(String username,String password){
         System.out.println("code"+username.toString());
-       // progressDialog.setMessage("Loading...");
-       // progressDialog.show();
+
         progressBar.setVisibility(View.VISIBLE);
         constraintLayout.setVisibility(View.INVISIBLE);
         final UserDetails userDetails=new UserDetails();
@@ -124,7 +121,6 @@ public class LoginWithPasswordActivity extends AppCompatActivity implements View
             @Override
             public void onFailure(Call<UserLogin> call, Throwable t) {
                 SnackBar("Something Wrong");
-                progressDialog.dismiss();
                 constraintLayout.setVisibility(View.VISIBLE);
                 System.out.println("failer errors is "+t.getMessage());
             }

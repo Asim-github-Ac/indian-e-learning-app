@@ -104,6 +104,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(manager);
         subjectPackageList=new ArrayList<>();
         GetPackages(Constant.insituteId);
+        System.out.println("key is________"+prefManager.getWeb_time());
         GetStudyMaterial(prefManager.getWeb_time());
         GetLiveClass(prefManager.getWeb_time());
         Log.d("tag", "onCreateView: em"+prefManager.getSave_Email_InFo());
